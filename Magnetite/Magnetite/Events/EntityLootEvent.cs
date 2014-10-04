@@ -1,0 +1,16 @@
+﻿using System;
+
+namespace Magnetite.Events
+{
+	public class EntityLootEvent : LootEvent
+	{
+		public readonly Entity Target;
+
+		public EntityLootEvent(PlayerLoot pl, Player looter, Entity looted)
+			: base(pl, looter)
+		{
+			Target = looted;
+		}
+	}
+}
+
