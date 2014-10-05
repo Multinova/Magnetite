@@ -43,7 +43,7 @@ namespace Magnetite
 
 		public string Name {
 			get {
-				return baseAnimal.name;
+				return baseAnimal.sourcePrefab.Substring(baseAnimal.sourcePrefab.LastIndexOf("/"));
 			}
 		}
 

@@ -263,6 +263,9 @@
 			else
 			{
 				Logger.LogWarning("[DataStore] File not exists: " + PATH);
+				File.Create(PATH);
+				Hashtable hashtable = new Hashtable();
+				this.datastore.Clear();
 			}
 		}
 

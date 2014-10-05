@@ -98,7 +98,7 @@ namespace Magnetite
 			{
 				return;
 			}
-
+			/*
 			if (cmd.cmd == "location")
 			{
 				player.Message(player.Location.ToString());
@@ -116,6 +116,7 @@ namespace Magnetite
 				//PluginLoader.GetInstance().ReloadPlugins();
 				return;
 			}
+			*/
 			if (OnCommand != null)
 			{
 				OnCommand(cmd);

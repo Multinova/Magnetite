@@ -187,6 +187,15 @@ namespace Magnetite
 			return FindByGameID(UInt64.Parse(steamID));
 		}
 
+		public static Player FindByName(string name)
+		{
+			BasePlayer player = BasePlayer.activePlayerList.Find((BasePlayer x) => x.displayName.Contains(name));
+			if (player != null)
+				return new Player(player);
+			Logger.LogDebug("[Player] Couldn't find player!");
+			return null;
+		}
+
 		public void Ban(string reason = "no reason")
 		{
 			ServerUsers.Set(GameID, ServerUsers.UserGroup.Banned, Name, reason);

@@ -47,11 +47,23 @@ namespace Magnetite
 				Directory.CreateDirectory(Util.GetPublicFolder());
 			}
 
+			//AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
+			
 			Config.Init();
 			Server.GetServer();
 			ModuleManager.LoadModules();
 
 			server.official = false;
+		}
+
+		private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs args)
+		{
+			Logger.Log("UnhandledExceptionEventArgs");
+			if (args == null || args.ExceptionObject == null)
+			{
+				return;
+			}
+			Logger.LogException((Exception)args.ExceptionObject);
 		}
 	}
 }

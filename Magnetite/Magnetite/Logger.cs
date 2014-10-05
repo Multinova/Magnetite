@@ -18,14 +18,14 @@ namespace Magnetite
 		private static Writer LogWriter;
 		private static Writer ChatWriter;
 
-		private static bool showChat = false;
-		private static bool showDebug = false;
-		private static bool showErrors = false;
-		private static bool showException = false;
-		private static bool logChat = false;
-		private static bool logDebug = false;
-		private static bool logErrors = false;
-		private static bool logException = false;
+		private static bool showChat = true;
+		private static bool showDebug = true;
+		private static bool showErrors = true;
+		private static bool showException = true;
+		private static bool logChat = true;
+		private static bool logDebug = true;
+		private static bool logErrors = true;
+		private static bool logException = true;
 
 		public static void Init()
 		{
@@ -161,10 +161,10 @@ namespace Magnetite
 		{
 			if (showException)
 				Debug.LogException(Ex, Context);
-
+			
 			if (!logException)
 				return;
-
+			
 			string Trace = "";
 			System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace();
 			for (int i = 1; i < stackTrace.FrameCount; i++)
