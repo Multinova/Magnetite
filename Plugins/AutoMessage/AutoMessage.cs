@@ -77,6 +77,6 @@ namespace Magnetite
 		public static int interval = 300;
 
 		[ConsoleSystem.Admin]
-		public static string message = "Teamspeak: 91.121.220.201:9987 ou/or ts.multinova.fr";
+		public static string message = "Teamspeak: ts.multinova.fr";
 	}
 }
