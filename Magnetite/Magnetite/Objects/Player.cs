@@ -73,10 +73,12 @@ namespace Magnetite
 			set {
 				if (value)
 				{
-					ServerUsers.Set(GameID, ServerUsers.UserGroup.Moderator, Name, "");
+					MakeModerator();
+					//ServerUsers.Set(GameID, ServerUsers.UserGroup.Moderator, Name, "");
 				}
 				else
 				{
+					MakeNone();
 					ServerUsers.Clear(GameID);
 				}
 			}
@@ -95,11 +97,13 @@ namespace Magnetite
 			set {
 				if (value)
 				{
-					ServerUsers.Set(GameID, ServerUsers.UserGroup.Owner, Name, "");
+					MakeOwner();
+					//ServerUsers.Set(GameID, ServerUsers.UserGroup.Owner, Name, "");
 				}
 				else
 				{
-					ServerUsers.Clear(GameID);
+					MakeNone();
+					//ServerUsers.Clear(GameID);
 				}
 			}
 		}
@@ -168,7 +172,9 @@ namespace Magnetite
 		{
 			BasePlayer player = BasePlayer.Find(nameOrSteamidOrIP);
 			if (player != null)
+			{
 				return new Player(player);
+			}
 			Logger.LogDebug("[Player] Couldn't find player!");
 			return null;
 		}
@@ -177,7 +183,9 @@ namespace Magnetite
 		{
 			BasePlayer player = BasePlayer.FindByID(steamID);
 			if (player != null)
+			{
 				return new Player(player);
+			}
 			Logger.LogDebug("[Player] Couldn't find player!");
 			return null;
 		}
@@ -191,7 +199,9 @@ namespace Magnetite
 		{
 			BasePlayer player = BasePlayer.activePlayerList.Find((BasePlayer x) => x.displayName.Contains(name));
 			if (player != null)
+			{
 				return new Player(player);
+			}
 			Logger.LogDebug("[Player] Couldn't find player!");
 			return null;
 		}
@@ -214,9 +224,19 @@ namespace Magnetite
 
 		public void Kill()
 		{
+			Kill(Rust.DamageType.Suicide);
+		}
+
+		public void Kill(Rust.DamageType type)
+		{
 			var info = new HitInfo();
-			info.damageType = Rust.DamageType.Suicide;
+			info.damageType = type;
 			info.Initiator = basePlayer as BaseEntity;
+			Kill(info);
+		}
+
+		public void Kill(HitInfo info)
+		{
 			basePlayer.Die(info);
 		}
 

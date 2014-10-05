@@ -262,10 +262,10 @@
 			}
 			else
 			{
-				Logger.LogWarning("[DataStore] File not exists: " + PATH);
+				Logger.LogWarning("[DataStore] File not exists, create " + PATH);
 				File.Create(PATH);
-				Hashtable hashtable = new Hashtable();
 				this.datastore.Clear();
+				this.Save();
 			}
 		}
 

@@ -44,9 +44,9 @@ namespace Teleport
 
 				if (player.Admin)
 				{
-					if (command.args.Length == 1)
+					if (command.quotedArgs.Length == 1)
 					{
-						Player target = Player.FindByName(command.args[0]);
+						Player target = Player.FindByName(command.quotedArgs[0]);
 						if (target != null)
 						{
 							player.TeleportToPlayer(target);
@@ -56,10 +56,10 @@ namespace Teleport
 							player.Message("No players found with that name!");
 						}
 					}
-					else if (command.args.Length == 2)
+					else if (command.quotedArgs.Length == 2)
 					{
-						Player target = Player.FindByName(command.args[0]);
-						Player target2 = Player.FindByName(command.args[1]);
+						Player target = Player.FindByName(command.quotedArgs[0]);
+						Player target2 = Player.FindByName(command.quotedArgs[1]);
 						if (target != null && target2 != null)
 						{
 							target.TeleportToPlayer(target2);
@@ -83,9 +83,9 @@ namespace Teleport
 			{
 				Player player = command.User;
 
-				if (command.args.Length == 1)
+				if (command.quotedArgs.Length == 1)
 				{
-					Player target = Player.FindByName(command.args[0]);
+					Player target = Player.FindByName(command.quotedArgs[0]);
 					if (target != null)
 					{
 						if (!Requests.Contains(player.SteamID))

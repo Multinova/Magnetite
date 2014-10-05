@@ -38,13 +38,13 @@ namespace PrivateMessage
 			if (command.cmd == "pm")
 			{
 				Player player = command.User;
-				if (command.args.Length < 2)
+				if (command.quotedArgs.Length < 2)
 				{
-					Player target = Player.FindByName(command.args[0]);
+					Player target = Player.FindByName(command.quotedArgs[0]);
 					if (target != null)
 					{
-						string[] message = new string[command.args.Length - 1];
-						Array.Copy(command.args, 1, message, 0, command.args.Length - 1);
+						string[] message = new string[command.quotedArgs.Length - 1];
+						Array.Copy(command.quotedArgs, 1, message, 0, command.quotedArgs.Length - 1);
 
 						target.MessageFrom("[PM] " + player.Name, String.Join(" ", message));
 						player.MessageFrom("[PM] " + player.Name, String.Join(" ", message));

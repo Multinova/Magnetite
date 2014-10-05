@@ -45,6 +45,10 @@ namespace WelcomeMessage
 	[ConsoleSystem.Factory("welcome")]
 	public class welcome : ConsoleSystem
 	{
+		static welcome() { }
+
+		public welcome() : base() { }
+
 		[ConsoleSystem.Admin]
 		public static bool enabled = true;
 

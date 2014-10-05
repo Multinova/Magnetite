@@ -530,7 +530,11 @@ namespace Magnetite
 			{
 				if (magnetite.enabled)
 				{
-					string pchGameTags = String.Format("mp{0},cp{1},v1140,modded", server.maxplayers, BasePlayer.activePlayerList.Count);
+					string pchGameTags = String.Format("mp{0},cp{1},v{2},modded", new object[] {
+						server.maxplayers,
+						BasePlayer.activePlayerList.Count,
+						Rust.Protocol.network
+					});
 					Steamworks.SteamGameServer.SetGameTags(pchGameTags);
 				}
 			}

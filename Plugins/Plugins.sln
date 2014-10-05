@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoinLeftMessage", "JoinLeft
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Suicide", "Suicide\Suicide.csproj", "{8A4E3447-7D15-43C2-8753-455C4D735973}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KickBan", "KickBan\KickBan.csproj", "{D9ADB60F-EEF4-4729-9E94-A3DFBF444343}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kits", "Kits\Kits.csproj", "{E4118EBC-C41A-4709-AD93-5AB67599BCA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{8A4E3447-7D15-43C2-8753-455C4D735973}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A4E3447-7D15-43C2-8753-455C4D735973}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A4E3447-7D15-43C2-8753-455C4D735973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9ADB60F-EEF4-4729-9E94-A3DFBF444343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9ADB60F-EEF4-4729-9E94-A3DFBF444343}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9ADB60F-EEF4-4729-9E94-A3DFBF444343}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9ADB60F-EEF4-4729-9E94-A3DFBF444343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4118EBC-C41A-4709-AD93-5AB67599BCA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4118EBC-C41A-4709-AD93-5AB67599BCA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4118EBC-C41A-4709-AD93-5AB67599BCA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4118EBC-C41A-4709-AD93-5AB67599BCA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

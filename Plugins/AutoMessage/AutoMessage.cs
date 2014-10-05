@@ -70,6 +70,10 @@ namespace Magnetite
 	[ConsoleSystem.Factory("automessage")]
 	public class automessage : ConsoleSystem
 	{
+		static automessage() { }
+
+		public automessage() : base() { }
+
 		[ConsoleSystem.Admin]
 		public static bool enabled = true;
 

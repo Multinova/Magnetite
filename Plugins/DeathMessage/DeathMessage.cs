@@ -116,6 +116,10 @@ namespace DeathMessage
 	[ConsoleSystem.Factory("deathmessages")]
 	public class deathmessages : ConsoleSystem
 	{
+		static deathmessages() { }
+
+		public deathmessages() : base() { }
+
 		[ConsoleSystem.Admin]
 		public static bool enabled = true;
 

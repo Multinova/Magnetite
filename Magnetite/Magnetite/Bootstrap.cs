@@ -10,6 +10,7 @@ namespace Magnetite
 
 		public static void AttachBootstrap()
 		{
+			Config.Init();
 			Logger.Init();
 			try
 			{
@@ -49,7 +50,6 @@ namespace Magnetite
 
 			//AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
 			
-			Config.Init();
 			Server.GetServer();
 			ModuleManager.LoadModules();
 

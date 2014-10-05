@@ -67,13 +67,13 @@
 		/*
 		public System.Collections.Generic.List<string> ChatHistoryMessages {
 			get {
-				return RustAPI.Data.GetData().chat_history;
+				return Magnetite.Data.GetData().chat_history;
 			}
 		}
 
 		public System.Collections.Generic.List<string> ChatHistoryUsers {
 			get {
-				return RustAPI.Data.GetData().chat_history_username;
+				return Magnetite.Data.GetData().chat_history_username;
 			}
 		}*/
 

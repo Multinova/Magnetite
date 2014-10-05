@@ -22,7 +22,7 @@ namespace Magnetite
 			var item = ItemManager.CreateByItemID(GetItemID(name), amount);
 			if (item == null)
 			{
-				Logger.LogDebug(String.Format("[InvItem] Couldn't create item: {0}x{1}", amount, name));
+				Logger.LogDebug(String.Format("[InventoryItem] Couldn't create item: {0}x{1}", amount, name));
 				_item = null;
 			}
 			else
@@ -37,7 +37,7 @@ namespace Magnetite
 			var item = ItemManager.CreateByItemID(GetItemID(name), 1);
 			if (item == null)
 			{
-				Logger.LogDebug(String.Format("[InvItem] Couldn't create item: {0}x{1}", 1, name));
+				Logger.LogDebug(String.Format("[InventoryItem] Couldn't create item: {0}x{1}", 1, name));
 				_item = null;
 			}
 			else

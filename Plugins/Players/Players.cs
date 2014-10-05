@@ -53,7 +53,7 @@ namespace Players
 				foreach (Player pl in server.ActivePlayers)
 				{
 					players.Add(pl.Name);
-					if (players.Count == 10)
+					if (players.Count == 5)
 					{
 						player.Message(string.Join(", ", players.ToArray()));
 						players.Clear();

@@ -21,7 +21,7 @@ namespace Magnetite
 		public string Name {
 			get
 			{
-				return baseEntity.sourcePrefab.Substring(baseEntity.sourcePrefab.LastIndexOf("/"));
+				return baseEntity.sourcePrefab.Substring(baseEntity.sourcePrefab.LastIndexOf("/") + 1);
 			}
 		}
 
