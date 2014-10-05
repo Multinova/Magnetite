@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ping", "Ping\Ping.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JoinLeftMessage", "JoinLeftMessage\JoinLeftMessage.csproj", "{E779FE0D-6F8F-4EC5-B1F2-DF464CE348D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Suicide", "Suicide\Suicide.csproj", "{8A4E3447-7D15-43C2-8753-455C4D735973}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{E779FE0D-6F8F-4EC5-B1F2-DF464CE348D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E779FE0D-6F8F-4EC5-B1F2-DF464CE348D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E779FE0D-6F8F-4EC5-B1F2-DF464CE348D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A4E3447-7D15-43C2-8753-455C4D735973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A4E3447-7D15-43C2-8753-455C4D735973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A4E3447-7D15-43C2-8753-455C4D735973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A4E3447-7D15-43C2-8753-455C4D735973}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
