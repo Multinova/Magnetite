@@ -9,13 +9,16 @@ namespace Magnetite.Patcher
 	{
 		private static AssemblyDefinition MagnetiteAssembly;
 		private static AssemblyDefinition rustAssembly;
+
 		private static TypeDefinition hooksClass;
 		private static TypeDefinition bAnimal;
 		private static TypeDefinition bPlayer;
 		private static TypeDefinition bCorpse;
 		private static TypeDefinition bBlock;
 		private static TypeDefinition pLoot;
+
 		private static string version = "1.0.0.2";
+
 		private static void BootstrapAttachPatch()
 		{
 			// Call our AttachBootstrap from their, Bootstrap.Start()
@@ -33,6 +36,7 @@ namespace Magnetite.Patcher
 				Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(attachBootstrap))
 			);
 		}
+
 		private static void ClientAuthPatch()
 		{
 			TypeDefinition connAuth = rustAssembly.MainModule.GetType("ConnectionAuth");
@@ -46,6 +50,7 @@ namespace Magnetite.Patcher
 			approve.Body.Instructions.Add(Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(cAuth)));
 			approve.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
 		}
+
 		private static void ChatPatch()
 		{
 			TypeDefinition chat = rustAssembly.MainModule.GetType("chat");
@@ -58,6 +63,7 @@ namespace Magnetite.Patcher
 			say.Body.Instructions.Add(Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(onchat)));
 			say.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
 		}
+
 		private static void GatherPatch()
 		{
 			TypeDefinition bRes = rustAssembly.MainModule.GetType("BaseResource");
@@ -71,6 +77,7 @@ namespace Magnetite.Patcher
 			gather.Body.Instructions.Add(Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(gathering)));
 			gather.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
 		}
+
 		private static void NPCDiedPatch()
 		{
 			MethodDefinition npcdie = bAnimal.GetMethod("Die");
@@ -81,6 +88,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(npcdie.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(npcdie.Body.Instructions[0x01], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(npcDied)));
 		}
+
 		private static void NPCHurtPatch()
 		{
 			MethodDefinition npchurt = bAnimal.GetMethod("OnAttacked");
@@ -93,6 +101,7 @@ namespace Magnetite.Patcher
 			npchurt.Body.Instructions.Add(Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(npcHurt)));
 			npchurt.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
 		}
+
 		private static void PlayerConnectedPatch()
 		{
 			MethodDefinition bpInit = bPlayer.GetMethod("PlayerInit");
@@ -105,6 +114,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertBefore(bpInit.Body.Instructions[32], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(bpInit.Body.Instructions[32], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(playerConnected)));
 		}
+
 		private static void PlayerDiedPatch()
 		{
 			MethodDefinition die = bPlayer.GetMethod("Die");
@@ -115,6 +125,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(die.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(die.Body.Instructions[0x01], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(playerDied)));
 		}
+
 		private static void PlayerAttackedPatch()
 		{
 			MethodDefinition hurt = bPlayer.GetMethod("OnAttacked");
@@ -126,6 +137,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(hurt.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(hurt.Body.Instructions[0x01], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(playerHurt)));
 		}
+
 		private static void PlayerTakeDamagePatch()
 		{
 			MethodDefinition hurt = bPlayer.GetMethod("TakeDamageIndicator");
@@ -148,6 +160,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(hurt.Body.Instructions[0x01], Instruction.Create(OpCodes.Ldarg_2));
 			iLProcessor.InsertAfter(hurt.Body.Instructions[0x02], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(playerTakeDMG)));
 		}
+
 		private static void PlayerTakeDamageOLPatch()
 		{
 			MethodDefinition hurt = bPlayer.GetMethod("TakeDamageIndicator");
@@ -169,6 +182,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(hurt.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(hurt.Body.Instructions[0x01], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(playerTakeDMG)));
 		}
+
 		private static void PlayerTakeRadiationPatch()
 		{
 			MethodDefinition getRadiated = bPlayer.GetMethod("UpdateRadiation");
@@ -179,6 +193,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(getRadiated.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(getRadiated.Body.Instructions[0x01], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(playerTakeRAD)));
 		}
+
 		private static void PlayerDisconnectedPatch()
 		{
 			MethodDefinition bpDisconnected = bPlayer.GetMethod("OnDisconnected");
@@ -188,6 +203,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertBefore(bpDisconnected.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_0));
 			iLProcessor.InsertAfter(bpDisconnected.Body.Instructions[0x00], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(playerDisconnected)));
 		}
+
 		private static void BuildingBlockAttackedPatch()
 		{
 			MethodDefinition bbAttacked = bBlock.GetMethod("OnAttacked_Destroy");
@@ -198,6 +214,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(bbAttacked.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(bbAttacked.Body.Instructions[0x01], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(entAttacked)));
 		}
+
 		private static void BuildingBlockFrameInitPatch()
 		{
 			MethodDefinition bbFrameInit = bBlock.GetMethod("InitializeAsFrame");
@@ -207,6 +224,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertBefore(bbFrameInit.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_0));
 			iLProcessor.InsertAfter(bbFrameInit.Body.Instructions[0x00], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(entDeployed)));
 		}
+
 		private static void BuildingBlockBuiltPatch()
 		{
 			MethodDefinition bbBuilt = bBlock.GetMethod("StopBeingAFrame");
@@ -216,6 +234,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertBefore(bbBuilt.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_0));
 			iLProcessor.InsertAfter(bbBuilt.Body.Instructions[0x00], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(entBuilt)));
 		}
+
 		private static void BuildingBlockUpdatePatch()
 		{
 			MethodDefinition bbBuild = bBlock.GetMethod("OnAttacked_Build");
@@ -226,6 +245,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(bbBuild.Body.Instructions[5], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(bbBuild.Body.Instructions[6], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(entBuild)));
 		}
+
 		private static void CorpseInitPatch()
 		{
 			MethodDefinition bcInit = bCorpse.GetMethod("InitCorpse");
@@ -236,6 +256,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(bcInit.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(bcInit.Body.Instructions[0x01], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(corpseInit)));
 		}
+
 		private static void CorpseAttackedPatch()
 		{
 			MethodDefinition bcAttacked = bCorpse.GetMethod("OnAttacked");
@@ -246,6 +267,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(bcAttacked.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(bcAttacked.Body.Instructions[0x01], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(corpseHit)));
 		}
+
 		private static void PlayerStartLootingPatch()
 		{
 			FieldDefinition owner = pLoot.GetField("Owner");
@@ -278,6 +300,7 @@ namespace Magnetite.Patcher
 			iiLProcessor.InsertAfter(plItem.Body.Instructions[0x02], Instruction.Create(OpCodes.Ldarg_1));
 			iiLProcessor.InsertAfter(plItem.Body.Instructions[0x03], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(lootItem)));
 		}
+
 		private static void ServerShutdownPatch()
 		{
 			TypeDefinition serverMGR = rustAssembly.MainModule.GetType("ServerMgr");
@@ -287,6 +310,7 @@ namespace Magnetite.Patcher
 			ILProcessor iLProcessor = disable.Body.GetILProcessor();
 			iLProcessor.InsertBefore(disable.Body.Instructions[0x00], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(shutdown)));
 		}
+
 		private static void RespawnPatch()
 		{
 			MethodDefinition respawn = bPlayer.GetMethod("Respawn");
@@ -301,6 +325,7 @@ namespace Magnetite.Patcher
 			iLProcessor.InsertAfter(respawn.Body.Instructions[0x00], Instruction.Create(OpCodes.Ldarg_1));
 			iLProcessor.InsertAfter(respawn.Body.Instructions[0x01], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(tPort)));
 		}
+
 		private static void SetModdedPatch()
 		{
 			TypeDefinition servermgr = rustAssembly.MainModule.GetType("ServerMgr");
@@ -310,6 +335,7 @@ namespace Magnetite.Patcher
 			ILProcessor il = servUpdate.Body.GetILProcessor();
 			il.InsertAfter(servUpdate.Body.Instructions[36], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(setModded)));
 		}
+
 		// from fougerite.patcher
 		private static MethodDefinition CloneMethod(MethodDefinition orig)
 		{
@@ -328,6 +354,7 @@ namespace Magnetite.Patcher
 			}
 			return definition;
 		}
+
 		private static void Patch()
 		{
 			BootstrapAttachPatch();

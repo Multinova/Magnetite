@@ -5,14 +5,15 @@ namespace Magnetite
 {
 	public class World
 	{
-
 		private static World instance;
 
 		public void AirDrop()
 		{
 			BaseEntity entity = GameManager.CreateEntity("events/cargo_plane", new Vector3(), new Quaternion());
 			if (!(bool)((UnityEngine.Object)entity))
+			{
 				return;
+			}
 			entity.Spawn(true);
 		}
 
@@ -20,7 +21,9 @@ namespace Magnetite
 		{
 			BaseEntity entity = GameManager.CreateEntity("events/cargo_plane", player.Location, player.basePlayer.transform.rotation);
 			if (!(bool)((UnityEngine.Object)entity))
+			{
 				return;
+			}
 			entity.Spawn(true);
 		}
 
@@ -44,7 +47,9 @@ namespace Magnetite
 		public static World GetWorld()
 		{
 			if (instance == null)
+			{
 				instance = new World();
+			}
 			return instance;
 		}
 	}

@@ -10,11 +10,17 @@
 	public class Server
 	{
 		public Dictionary<ulong, Player> Players;
+
 		public Dictionary<ulong, OfflinePlayer> OfflinePlayers;
+
 		public Dictionary<string, LoadOut> LoadOuts;
+
 		public DataStore serverData;
+
 		private static Magnetite.Server server;
+
 		public static string server_message_name = "SERVER";
+
 		public Util util = new Util();
 
 		public void Broadcast(string arg)
@@ -124,19 +130,15 @@
 			serverData.Save();
 		}
 
-		public List<Player> ActivePlayers
-		{
-			get
-			{
+		public List<Player> ActivePlayers {
+			get {
 				return (from player in BasePlayer.activePlayerList
 						select new Player(player)).ToList();
 			}
 		}
 
-		public List<Player> SleepingPlayers
-		{
-			get
-			{
+		public List<Player> SleepingPlayers {
+			get {
 				return (from player in BasePlayer.sleepingPlayerList
 						select new Player(player)).ToList();
 			}

@@ -9,90 +9,68 @@ namespace Magnetite
 
 		public readonly BasePlayer basePlayer;
 
-		public bool IsBleeding
-		{
-			get
-			{
+		public bool IsBleeding {
+			get {
 				return Convert.ToBoolean(basePlayer.metabolism.bleeding.value); ;
 			}
-			set
-			{
+			set {
 				basePlayer.metabolism.bleeding.value = (float)Convert.ToInt32(value);
 			}
 		}
 
-		public bool Admin
-		{
-			get
-			{
+		public bool Admin {
+			get {
 				return basePlayer.IsAdmin();
 			}
 		}
 
-		public string AuthStatus
-		{
-			get
-			{
+		public string AuthStatus {
+			get {
 				return basePlayer.net.connection.authStatus;
 			}
 		}
 
-		public ulong GameID
-		{
-			get
-			{
+		public ulong GameID {
+			get {
 				return basePlayer.userID;
 			}
 		}
 
-		public float Health
-		{
-			get
-			{
+		public float Health {
+			get {
 				return basePlayer.Health();
 			}
-			set
-			{
+			set {
 				basePlayer.metabolism.health.value = value;
 			}
 		}
 
-		public Inventory Inventory
-		{
-			get
-			{
+		public Inventory Inventory {
+			get {
 				return new Inventory(basePlayer.inventory);
 			}
 		}
 
-		public string IP
-		{
-			get
-			{
+		public string IP {
+			get {
 				return basePlayer.net.connection.ipaddress;
 			}
 		}
 
-		public Vector3 Location
-		{
-			get
-			{
+		public Vector3 Location {
+			get {
 				return basePlayer.transform.position;
 			}
-			set
-			{
+			set {
 				basePlayer.transform.position.Set(value.x, value.y, value.z);
 			}
 		}
 
-		public bool Moderator
-		{
-			get
-			{
+		public bool Moderator {
+			get {
 				return ServerUsers.Is(GameID, ServerUsers.UserGroup.Moderator);
 			}
-			set
-			{
+			set {
 				if (value)
 				{
 					ServerUsers.Set(GameID, ServerUsers.UserGroup.Moderator, Name, "");
@@ -104,22 +82,17 @@ namespace Magnetite
 			}
 		}
 
-		public string Name
-		{
-			get
-			{
+		public string Name {
+			get {
 				return basePlayer.displayName;
 			}
 		}
 
-		public bool Owner
-		{
-			get
-			{
+		public bool Owner {
+			get {
 				return ServerUsers.Is(GameID, ServerUsers.UserGroup.Owner);
 			}
-			set
-			{
+			set {
 				if (value)
 				{
 					ServerUsers.Set(GameID, ServerUsers.UserGroup.Owner, Name, "");
@@ -131,70 +104,53 @@ namespace Magnetite
 			}
 		}
 
-		public string OS
-		{
-			get
-			{
+		public string OS {
+			get {
 				return basePlayer.net.connection.os;
 			}
 		}
 
-		public int Ping
-		{
-			get
-			{
+		public int Ping {
+			get {
 				return basePlayer.net.connection.ping;
 			}
 		}
 
-		public string SteamID
-		{
-			get
-			{
+		public string SteamID {
+			get {
 				return basePlayer.userID.ToString();
 			}
 		}
 
-		public float TimeOnline
-		{
-			get
-			{
+		public float TimeOnline {
+			get {
 				return basePlayer.net.connection.connectionTime;
 			}
 		}
 
-		public float X
-		{
-			get
-			{
+		public float X {
+			get {
 				return basePlayer.transform.position.x;
 			}
-			set
-			{
+			set {
 				basePlayer.transform.position.Set(value, Y, Z);
 			}
 		}
 
-		public float Y
-		{
-			get
-			{
+		public float Y {
+			get {
 				return basePlayer.transform.position.y;
 			}
-			set
-			{
+			set {
 				basePlayer.transform.position.Set(X, value, Z);
 			}
 		}
 
-		public float Z
-		{
-			get
-			{
+		public float Z {
+			get {
 				return basePlayer.transform.position.z;
 			}
-			set
-			{
+			set {
 				basePlayer.transform.position.Set(X, Y, value);
 			}
 		}
@@ -281,6 +237,16 @@ namespace Magnetite
 		public void MessageFrom(string from, string msg)
 		{
 			basePlayer.SendConsoleCommand("chat.add " + StringExtensions.QuoteSafe(from) + " " + StringExtensions.QuoteSafe(msg));
+		}
+
+		public void TeleportTo(float x, float y, float z)
+		{
+			basePlayer.transform.position.Set(x, y, z);
+		}
+
+		public void TeleportToPlayer(Player player)
+		{
+			basePlayer.transform.position.Set(player.X, player.Y, player.Z);
 		}
 
 		#endregion

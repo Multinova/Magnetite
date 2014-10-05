@@ -7,60 +7,47 @@ namespace Magnetite
 		//
 		// Properties
 		//
-		public virtual string Author
-		{
-			get
-			{
+		public virtual string Author {
+			get {
 				return "None";
 			}
 		}
 
-		public virtual string Description
-		{
-			get
-			{
+		public virtual string Description {
+			get {
 				return "None";
 			}
 		}
 
-		public virtual bool Enabled
-		{
+		public virtual bool Enabled {
 			get;
 			set;
 		}
 
-		public virtual string ModuleFolder
-		{
+		public virtual string ModuleFolder {
 			get;
 			set;
 		}
 
-		public virtual string Name
-		{
-			get
-			{
+		public virtual string Name {
+			get {
 				return "None";
 			}
 		}
 
-		public int Order
-		{
+		public int Order {
 			get;
 			set;
 		}
 
-		public virtual string UpdateURL
-		{
-			get
-			{
+		public virtual string UpdateURL {
+			get {
 				return "";
 			}
 		}
 
-		public virtual Version Version
-		{
-			get
-			{
+		public virtual Version Version {
+			get {
 				return new Version(1, 0);
 			}
 		}

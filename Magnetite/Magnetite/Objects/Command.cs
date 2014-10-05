@@ -6,9 +6,13 @@ namespace Magnetite
 	public class Command
 	{
 		public string ReplyWith;
+
 		public readonly string cmd;
+
 		public readonly string[] args;
+
 		public readonly string[] quotedArgs;
+
 		public readonly Player User;
 
 		public Command(Player player, string[] command)

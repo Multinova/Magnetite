@@ -4,14 +4,14 @@ namespace Magnetite.Events
 {
 	public class PlayerTakeRadsEvent
 	{
-
 		public readonly Player Victim;
+
 		public float Amount;
 
-		public PlayerTakeRadsEvent(Player p, float amount)
+		public PlayerTakeRadsEvent(Player player, float amount)
 		{
 			Amount = amount;
-			Victim = p;
+			Victim = player;
 		}
 	}
 }

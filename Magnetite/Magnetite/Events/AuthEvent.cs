@@ -17,34 +17,26 @@ namespace Magnetite.Events
 			approved = true;
 		}
 
-		public ulong GameID
-		{
-			get
-			{
+		public ulong GameID {
+			get {
 				return con.userid;
 			}
 		}
 
-		public string IP
-		{
-			get
-			{
+		public string IP {
+			get {
 				return con.ipaddress;
 			}
 		}
 
-		public string Name
-		{
-			get
-			{
+		public string Name {
+			get {
 				return con.username;
 			}
 		}
 
-		public string OS
-		{
-			get
-			{
+		public string OS {
+			get {
 				return con.os;
 			}
 		}

@@ -15,11 +15,15 @@ namespace Magnetite
 		{
 			string ConfigPath = Path.Combine(Util.GetPublicFolder(), "Magnetite.cfg");
 
-			if (File.Exists(ConfigPath)) {
+			if (File.Exists(ConfigPath))
+			{
 				MagnetiteConfig = new IniParser(ConfigPath);
 				Debug.Log("Config " + ConfigPath + " loaded!");
-			} else
+			}
+			else
+			{
 				Debug.Log("Config " + ConfigPath + " NOT loaded!");
+			}
 		}
 
 		public static string GetValue(string Section, string Setting)

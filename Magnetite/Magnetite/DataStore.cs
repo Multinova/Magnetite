@@ -10,13 +10,17 @@
 	public class DataStore
 	{
 		public readonly Hashtable datastore;
+
 		private static DataStore instance;
+
 		public string PATH;
 
 		private object StringifyIfVector3(object keyorval)
 		{
 			if (keyorval == null)
+			{
 				return keyorval;
+			}
 
 			try
 			{
@@ -38,7 +42,9 @@
 		private object ParseIfVector3String(object keyorval)
 		{
 			if (keyorval == null)
+			{
 				return keyorval;
+			}
 
 			try
 			{
@@ -125,7 +131,9 @@
 		public void Add(string tablename, object key, object val)
 		{
 			if (key == null)
+			{
 				key = "NullReference";
+			}
 
 			Hashtable hashtable = (Hashtable)this.datastore[tablename];
 			if (hashtable == null)
@@ -139,7 +147,9 @@
 		public bool ContainsKey(string tablename, object key)
 		{
 			if (key == null)
+			{
 				return false;
+			}
 
 			Hashtable hashtable = (Hashtable)this.datastore[tablename];
 			if (hashtable != null)
@@ -180,7 +190,9 @@
 		public object Get(string tablename, object key)
 		{
 			if (key == null)
+			{
 				return null;
+			}
 
 			Hashtable hashtable = (Hashtable)this.datastore[tablename];
 			if (hashtable == null)
@@ -257,8 +269,10 @@
 		public void Remove(string tablename, object key)
 		{
 			if (key == null)
+			{
 				return;
-
+			}
+			
 			Hashtable hashtable = (Hashtable)this.datastore[tablename];
 			if (hashtable != null)
 			{

@@ -10,9 +10,13 @@
 	{
 
 		private Dictionary<string, object> _args;
+
 		private readonly string _name;
+
 		private readonly System.Timers.Timer _timer;
+
 		private long lastTick;
+
 		private int _elapsedCount;
 
 		public delegate void TimedEventFireDelegate(string name);
@@ -20,6 +24,7 @@
 		public delegate void TimedEventFireArgsDelegate(string name, Dictionary<string, object> list);
 
 		public event TimedEventFireDelegate OnFire;
+
 		public event TimedEventFireArgsDelegate OnFireArgs;
 
 		public TimedEvent(string name, double interval)
@@ -63,30 +68,25 @@
 			this._timer.Stop();
 		}
 
-		public Dictionary<string, object> Args
-		{
+		public Dictionary<string, object> Args {
 			get { return this._args; }
 			set { this._args = value; }
 		}
 
-		public double Interval
-		{
+		public double Interval {
 			get { return this._timer.Interval; }
 			set { this._timer.Interval = value; }
 		}
 
-		public string Name
-		{
+		public string Name {
 			get { return this._name; }
 		}
 
-		public double TimeLeft
-		{
+		public double TimeLeft {
 			get { return (this.Interval - ((DateTime.UtcNow.Ticks - this.lastTick) / 0x2710L)); }
 		}
 
-		public int ElapsedCount
-		{
+		public int ElapsedCount {
 			get { return this._elapsedCount; }
 		}
 	}

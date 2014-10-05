@@ -9,58 +9,44 @@ namespace Magnetite
 
 		public readonly BaseEntity baseEntity;
 
-		public Vector3 Location
-		{
-			get
-			{
+		public Vector3 Location {
+			get {
 				return baseEntity.transform.position;
 			}
-			set
-			{
+			set {
 				baseEntity.transform.position.Set(value.x, value.y, value.z);
 			}
 		}
 
-		public string Name
-		{
-			get
-			{
+		public string Name {
+			get {
 				return baseEntity.sourcePrefab;
 			}
 		}
 
-		public float X
-		{
-			get
-			{
+		public float X {
+			get {
 				return baseEntity.transform.position.x;
 			}
-			set
-			{
+			set {
 				baseEntity.transform.position.Set(value, Y, Z);
 			}
 		}
 
-		public float Y
-		{
-			get
-			{
+		public float Y {
+			get {
 				return baseEntity.transform.position.y;
 			}
-			set
-			{
+			set {
 				baseEntity.transform.position.Set(X, value, Z);
 			}
 		}
 
-		public float Z
-		{
-			get
-			{
+		public float Z {
+			get {
 				return baseEntity.transform.position.z;
 			}
-			set
-			{
+			set {
 				baseEntity.transform.position.Set(X, Y, value);
 			}
 		}

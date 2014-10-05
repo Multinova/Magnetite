@@ -7,30 +7,39 @@ namespace Magnetite
 	public class LoadOut
 	{
 		public Dictionary<int, LoadOutItem> items;
+
 		public readonly string path;
+
 		public readonly string Name;
+
 		public int itemCount;
 
 		public bool ModeratorUse;
+
 		public bool OwnerUse;
+
 		public bool NormalUse;
 
 		public LoadOut(string name)
 		{
 			path = Path.Combine(Util.GetLoadoutFolder(), name + ".ini");
 			bool nu = false;
-			if (!File.Exists(path)) {
+			if (!File.Exists(path))
+			{
 				File.AppendAllText(path, "");
 				nu = true;
 			}
 			var ini = new IniParser(path);
 			Name = ini.Name;
-			if (!nu) {
+			if (!nu)
+			{
 				itemCount = Int32.Parse(ini.GetSetting("Def", "itemCount"));
 				OwnerUse = ini.GetBoolSetting("Def", "ownerCanUse");
 				ModeratorUse = ini.GetBoolSetting("Def", "modCanUse");
 				NormalUse = ini.GetBoolSetting("Def", "normalCanUse");
-			} else {
+			}
+			else
+			{
 				itemCount = 0;
 				OwnerUse = true;
 				NormalUse = true;
@@ -38,9 +47,11 @@ namespace Magnetite
 			}
 			items = new Dictionary<int, LoadOutItem>(30);
 
-			if (itemCount != 0) {
+			if (itemCount != 0)
+			{
 				LoadOutItem current;
-				for (var i = 0; i < itemCount; i++) {
+				for (var i = 0; i < itemCount; i++)
+				{
 					string namee = ini.GetSetting(i.ToString(), "Name");
 					int amount = Int32.Parse(ini.GetSetting(i.ToString(), "Amount"));
 					current = new LoadOutItem(namee, amount);
@@ -49,7 +60,9 @@ namespace Magnetite
 			}
 			ini = null;
 			if (Server.GetServer().LoadOuts.ContainsKey(Name))
+			{
 				Server.GetServer().LoadOuts.Remove(Name);
+			}
 			Server.GetServer().LoadOuts.Add(Name, this);
 		}
 
@@ -60,7 +73,8 @@ namespace Magnetite
 
 		public bool Add(LoadOutItem item)
 		{
-			if (itemCount >= 30) {
+			if (itemCount >= 30)
+			{
 				Logger.LogDebug("[LoadOut] You may not add more then 30 items to one loadout.");
 				return false;
 			}
@@ -68,14 +82,17 @@ namespace Magnetite
 			itemCount++;
 
 			if (Server.GetServer().LoadOuts.ContainsKey(Name))
+			{
 				Server.GetServer().LoadOuts.Remove(Name);
+			}
 			Server.GetServer().LoadOuts.Add(Name, this);
 			return true;
 		}
 
 		public bool Remove(int item)
 		{
-			if (items.ContainsKey(item)) {
+			if (items.ContainsKey(item))
+			{
 				items.Remove(item);
 				itemCount--;
 				Reorganize();
@@ -89,19 +106,24 @@ namespace Magnetite
 			var count = 0;
 			var items2 = items;
 			items = new Dictionary<int, LoadOutItem>(30);
-			foreach (LoadOutItem item in items2.Values) {
-				if (item != null) {
+			foreach (LoadOutItem item in items2.Values)
+			{
+				if (item != null)
+				{
 					items.Add(count, item);
 					count++;
 				}
 			}
 			count++;
-			if (count != itemCount) {
+			if (count != itemCount)
+			{
 				Logger.LogDebug("[LoadOut] An error accoured while reorganizing the items?");
 				itemCount = count;
 			}
 			if (Server.GetServer().LoadOuts.ContainsKey(Name))
+			{
 				Server.GetServer().LoadOuts.Remove(Name);
+			}
 			Server.GetServer().LoadOuts.Add(Name, this);
 		}
 
@@ -112,7 +134,8 @@ namespace Magnetite
 			ini.AddSetting("Def", "ownerCanUse", OwnerUse.ToString());
 			ini.AddSetting("Def", "modCanUse", ModeratorUse.ToString());
 			ini.AddSetting("Def", "normalCanUse", NormalUse.ToString());
-			for (var i = 0; i < itemCount; i++) {
+			for (var i = 0; i < itemCount; i++)
+			{
 				ini.AddSetting(i.ToString(), "Name", items[i].Name);
 				ini.AddSetting(i.ToString(), "Amount", items[i].Amount.ToString());
 			}
@@ -121,7 +144,8 @@ namespace Magnetite
 
 		public void ToInv(Inventory inv)
 		{
-			try {
+			try
+			{
 				bool perms = false;
 				if (NormalUse)
 					perms = true;
@@ -134,7 +158,9 @@ namespace Magnetite
 					foreach (LoadOutItem item in items.Values)
 						inv.Add(item.invItem);
 				
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				Logger.LogException(ex);
 			}
 		}

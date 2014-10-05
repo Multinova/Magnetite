@@ -6,7 +6,6 @@ namespace Magnetite
 {
 	public class Bootstrap : MonoBehaviour
 	{
-
 		public static string Version = "0.9.2";
 
 		public static void AttachBootstrap()
@@ -44,18 +43,15 @@ namespace Magnetite
 		public static void Init()
 		{
 			if (!Directory.Exists(Util.GetPublicFolder()))
+			{
 				Directory.CreateDirectory(Util.GetPublicFolder());
+			}
 
 			Config.Init();
 			Server.GetServer();
 			ModuleManager.LoadModules();
 
 			server.official = false;
-
-			/*
-			if (!server.hostname.ToLower().Contains("magnetite"))
-				server.hostname = String.Format("{0} [Magnetite v.{1}]", server.hostname, Version);
-			*/
 		}
 	}
 }

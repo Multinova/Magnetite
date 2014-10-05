@@ -17,6 +17,7 @@ namespace Magnetite
 		private static string LogsFolder;
 		private static Writer LogWriter;
 		private static Writer ChatWriter;
+
 		private static bool showChat = false;
 		private static bool showDebug = false;
 		private static bool showErrors = false;

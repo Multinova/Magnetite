@@ -4,12 +4,16 @@ namespace Magnetite
 {
 	public class Chat
 	{
-
 		public readonly ConsoleSystem.Arg _arg;
+
 		public readonly string OriginalText;
+
 		public readonly Player User;
+
 		public string BroadcastName;
+
 		public string FinalText;
+
 		public string ReplyWith;
 
 		public Chat(Player player, ConsoleSystem.Arg args)

@@ -75,7 +75,9 @@ namespace Magnetite
 
 			ca.m_AuthConnection.Remove(connection);
 			if (!ae.approved)
+			{
 				ConnectionAuth.Reject(connection, ae._reason);
+			}
 
 			Approval instance = new Approval();
 			instance.level = Application.loadedLevelName;
@@ -87,57 +89,28 @@ namespace Magnetite
 		// chat.say().Hooks.Chat()
 		public static void Command(ConsoleSystem.Arg arg)
 		{
-
 			Player player = new Player(arg.Player());
 			string[] args = arg.ArgsStr.Substring(2, arg.ArgsStr.Length - 3).Replace("\\", "").Split(new string[] { " " }, StringSplitOptions.None);
 
 			Command cmd = new Command(player, args);
 
 			if (cmd.cmd == "")
-				return;
-
-			if (Config.GetBoolValue("Commands", "enabled"))
 			{
-				/*
-				if (cmd.cmd == Config.GetValue("Commands", "ShowMyStats"))
-				{
-					PlayerStats stats = player.Stats;
-					player.Message(String.Format("You have {0} kills and {1} deaths!", stats.Kills, stats.Deaths));
-					player.Message(String.Format("You have taken {0} dmg, and caused {1} in total!", stats.TotalDamageTaken, stats.TotalDamageDone));
-					return;
-				}
-				if (cmd.cmd == Config.GetValue("Commands", "ShowStatsOther"))
-				{
-					Player pOther = Player.Find(String.Join(" ", cmd.args));
-					if (pOther != null)
-					{
-						PlayerStats stats2 = pOther.Stats;
-						player.Message(String.Format("You have {0} kills and {1} deaths!", stats2.Kills, stats2.Deaths));
-						player.Message(String.Format("You have taken {0} dmg, and caused {1} in total!", stats2.TotalDamageTaken, stats2.TotalDamageDone));
-						return;
-					}
-					player.Message("Can't find player: " + String.Join(" ", cmd.args));
-					return;
-				}*/
-				if (cmd.cmd == Config.GetValue("Commands", "ShowLocation"))
-				{
-					player.Message(player.Location.ToString());
-					return;
-				}
-				if (cmd.cmd == Config.GetValue("Commands", "ShowOnlinePlayers"))
-				{
-					string msg = Server.GetServer().Players.Count == 1 ? "You are alone!" : String.Format("There are: {0} players online!", Server.GetServer().Players.Count);
-					player.Message(msg);
-					return;
-				}
-			}
-
-			if (cmd.cmd == "login" && cmd.args[0] == "12345")
-			{
-				Debug.Log("making you an admin");
-				player.MakeModerator("Just cause!");
 				return;
 			}
+
+			if (cmd.cmd == "location")
+			{
+				player.Message(player.Location.ToString());
+				return;
+			}
+			if (cmd.cmd == "players")
+			{
+				string msg = Server.GetServer().Players.Count == 1 ? "You are alone!" : String.Format("There are: {0} players online!", Server.GetServer().Players.Count);
+				player.Message(msg);
+				return;
+			}
+
 			if ((cmd.cmd == "magnetite.reload") && player.Admin)
 			{
 				//PluginLoader.GetInstance().ReloadPlugins();
@@ -149,8 +122,9 @@ namespace Magnetite
 			}
 
 			if (cmd.ReplyWith != "")
+			{
 				arg.ReplyWith(cmd.ReplyWith);
-
+			}
 		}
 
 		// chat.say()
@@ -175,17 +149,23 @@ namespace Magnetite
 
 				BasePlayer basePlayer = ArgExtension.Player(arg);
 				if (!(bool)((UnityEngine.Object)basePlayer))
+				{
 					return;
+				}
 
 				Chat pChat = new Chat(new Player(basePlayer), arg);
 
 				string str = arg.GetString(0, "text");
 
 				if (str.Length > 128)
+				{
 					str = str.Substring(0, 128);
+				}
 
 				if (chat.serverlog)
+				{
 					Debug.Log((object)(basePlayer.displayName + ": " + str));
+				}
 
 				if (OnChat != null)
 				{
@@ -206,7 +186,9 @@ namespace Magnetite
 		public static void Gathering(BaseResource res, HitInfo info)
 		{
 			if (!Realm.Server())
+			{
 				return;
+			}
 
 			if (OnGathering != null)
 			{
@@ -215,9 +197,13 @@ namespace Magnetite
 
 			res.health -= info.damageAmount * info.resourceGatherProficiency;
 			if ((double)res.health <= 0.0)
+			{
 				res.Kill(ProtoBuf.EntityDestroy.Mode.None, 0, 0.0f, new Vector3());
+			}
 			else
+			{
 				res.Invoke("UpdateNetworkStage", 0.1f);
+			}
 		}
 
 		// BaseAnimal.OnAttacked()
@@ -227,14 +213,20 @@ namespace Magnetite
 			var npc = new NPC(animal);
 
 			if (!Realm.Server() || (double)animal.myHealth <= 0.0)
+			{
 				return;
+			}
 
 			if (OnNPCHurt != null && (animal.myHealth - info.damageAmount) > 0.0f)
+			{
 				OnNPCHurt(new Events.NPCHurtEvent(npc, info));
+			}
 
 			animal.myHealth -= info.damageAmount;
 			if ((double)animal.myHealth > 0.0)
+			{
 				return;
+			}
 			animal.Die(info);
 		}
 
@@ -254,9 +246,13 @@ namespace Magnetite
 			var player = connection.player as BasePlayer;
 			var p = new Player(player);
 			if (Server.GetServer().OfflinePlayers.ContainsKey(player.userID))
+			{
 				Server.GetServer().OfflinePlayers.Remove(player.userID);
+			}
 			if (!Server.GetServer().Players.ContainsKey(player.userID))
+			{
 				Server.GetServer().Players.Add(player.userID, p);
+			}
 
 			if (OnPlayerConnected != null)
 			{
@@ -285,7 +281,9 @@ namespace Magnetite
 			}
 
 			if (!pde.dropLoot)
+			{
 				player.inventory.Strip();
+			}
 		}
 
 		// BasePlayer.OnDisconnected()
@@ -307,7 +305,9 @@ namespace Magnetite
 			}
 
 			if (Server.GetServer().Players.ContainsKey(player.userID))
+			{
 				Server.GetServer().Players.Remove(player.userID);
+			}
 			if (OnPlayerDisconnected != null)
 			{
 				OnPlayerDisconnected(p);
@@ -329,14 +329,19 @@ namespace Magnetite
 			}
 
 			if (!player.TestAttack(info) || !Realm.Server() || (info.damageAmount <= 0.0f))
+			{
 				return;
+			}
+			
 			player.metabolism.bleeding.Add(Mathf.InverseLerp(0.0f, 100f, info.damageAmount));
 			player.metabolism.SubtractHealth(info.damageAmount);
 			player.TakeDamageIndicator(info.damageAmount, player.transform.position - info.PointStart);
 			player.CheckDeathCondition(info);
 
 			if (!player.IsDead() && OnPlayerHurt != null)
+			{
 				OnPlayerHurt(new Events.PlayerHurtEvent(p, info));
+			}
 
 			player.SendEffect("takedamage_hit");
 		}
@@ -448,7 +453,6 @@ namespace Magnetite
 		public static void CorpseHit(BaseCorpse corpse, HitInfo info)
 		{
 			// works
-
 			CorpseHurtEvent che = new CorpseHurtEvent(corpse, info);
 			if (OnCorpseAttacked != null)
 			{
@@ -460,7 +464,6 @@ namespace Magnetite
 		public static void StartLootingEntity(PlayerLoot playerLoot, BasePlayer looter, BaseEntity entity)
 		{
 			// not tested, what is a lootable entity anyway?
-
 			var ele = new Events.EntityLootEvent(playerLoot, new Player(looter), new Entity(entity));
 
 			if (OnLootingEntity != null)
@@ -473,7 +476,6 @@ namespace Magnetite
 		public static void StartLootingPlayer(PlayerLoot playerLoot, BasePlayer looter, BasePlayer looted)
 		{
 			// not tested
-
 			var ple = new Events.PlayerLootEvent(playerLoot, new Player(looter), new Player(looted));
 
 			if (OnLootingPlayer != null)
@@ -486,7 +488,6 @@ namespace Magnetite
 		public static void StartLootingItem(PlayerLoot playerLoot, BasePlayer looter, Item item)
 		{
 			// works, event needed
-
 			var ile = new Events.ItemLootEvent(playerLoot, new Player(looter), item);
 
 			if (OnLootingItem != null)

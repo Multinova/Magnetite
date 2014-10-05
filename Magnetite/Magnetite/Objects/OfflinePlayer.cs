@@ -7,13 +7,21 @@ namespace Magnetite
 	public class OfflinePlayer
 	{
 		public string Name;
+
 		public string SteamID;
+
 		public string IP;
+
 		public string OS;
+
 		public float X;
+
 		public float Y;
+
 		public float Z;
+
 		public ulong totalTimeOnline;
+
 		public bool Admin;
 
 		// you shouldn't ever call this constructor manually

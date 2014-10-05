@@ -49,12 +49,14 @@ namespace Magnetite
 			Logger.Log ("[Modules] Loading modules...");
 			string path = Path.Combine (ModuleManager.ModulesFolder, "ignoredmodules.txt");
 			List<string> list = new List<string> ();
-			if (File.Exists (path)) {
+			if (File.Exists (path))
+			{
 				list.AddRange (File.ReadAllLines (path));
 			}
 			DirectoryInfo[] directories = new DirectoryInfo (ModuleManager.ModulesFolder).GetDirectories ();
 			DirectoryInfo[] array = directories;
-			for (int i = 0; i < array.Length; i++) {
+			for (int i = 0; i < array.Length; i++)
+			{
 				DirectoryInfo directoryInfo = array [i];
 				FileInfo fileInfo = new FileInfo (Path.Combine (directoryInfo.FullName, directoryInfo.Name + ".dll"));
 				if (fileInfo.Exists)
@@ -114,11 +116,14 @@ namespace Magnetite
 			IOrderedEnumerable<ModuleContainer> orderedEnumerable = from x in ModuleManager.Plugins
 			orderby x.Plugin.Order, x.Plugin.Name
 			select x;
-			foreach (ModuleContainer current in orderedEnumerable) {
-				try {
+			foreach (ModuleContainer current in orderedEnumerable)
+			{
+				try
+				{
 					current.Initialize ();
 				}
-				catch (Exception arg3) {
+				catch (Exception arg3)
+				{
 					Logger.LogError (string.Format ("[Modules] Module \"{0}\" has thrown an exception during initialization. {1}", current.Plugin.Name, arg3), null);
 				}
 				Logger.Log (string.Format ("[Modules] Module {0} v{1} (by {2}) initiated.", current.Plugin.Name, current.Plugin.Version, current.Plugin.Author), null);
@@ -134,19 +139,25 @@ namespace Magnetite
 
 		public static void UnloadModules()
 		{
-			foreach (ModuleContainer current in ModuleManager.Modules) {
-				try {
+			foreach (ModuleContainer current in ModuleManager.Modules)
+			{
+				try
+				{
 					current.DeInitialize ();
 				}
-				catch (Exception arg) {
+				catch (Exception arg)
+				{
 					Logger.LogError (string.Format ("[Modules] Module \"{0}\" has thrown an exception while being deinitialized: {1}", current.Plugin.Name, arg), null);
 				}
 			}
-			foreach (ModuleContainer current2 in ModuleManager.Modules) {
-				try {
+			foreach (ModuleContainer current2 in ModuleManager.Modules)
+			{
+				try
+				{
 					current2.Dispose ();
 				}
-				catch (Exception arg2) {
+				catch (Exception arg2)
+				{
 					Logger.LogError (string.Format ("[Modules] Module \"{0}\" has thrown an exception while being disposed: {1}", current2.Plugin.Name, arg2), null);
 				}
 			}

@@ -5,6 +5,7 @@ namespace Magnetite.Events
 	public class GatherEvent
 	{
 		private HitInfo _info;
+
 		private BaseResource _res;
 
 		public GatherEvent(BaseResource res, HitInfo info)

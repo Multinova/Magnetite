@@ -13,7 +13,9 @@
 	public class Util
 	{
 		private readonly Dictionary<string, System.Type> typeCache = new Dictionary<string, System.Type>();
+
 		private static Util util;
+
 		private static DirectoryInfo UtilPath;
 
 		public void ConsoleLog(string str, bool adminOnly = false)
@@ -74,7 +76,9 @@
 			path = DataStore.GetInstance().RemoveChars(path);
 			path = Path.Combine(UtilPath.FullName, path + ".dump");
 			if (path == null)
+			{
 				return false;
+			}
 
 			string result = string.Empty;
 
@@ -173,7 +177,9 @@
 		{
 			var path = Path.Combine(GetPublicFolder(), "Items.ini");
 			if (!File.Exists(path))
+			{
 				File.AppendAllText("", path);
+			}
 			var ini = new IniParser(path);
 			foreach (Item.Definition item in ItemManager.Instance.itemList)
 			{
@@ -262,7 +268,9 @@
 		{
 			System.Type t;
 			if (this.TryFindType(typeName, out t))
+			{
 				return t;
+			}
 			throw new Exception("Type not found " + typeName);
 		}
 	}

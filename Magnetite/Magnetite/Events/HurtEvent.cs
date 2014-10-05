@@ -22,6 +22,18 @@ namespace Magnetite.Events
 				return _info.damageType;
 			}
 		}
+
+		public string WeaponName {
+			get {
+				return _info.Weapon.info.displayname;
+			}
+		}
+
+		public BaseEntity Attacker {
+			get {
+				return _info.Initiator;
+			}
+		}
 	}
 }
 

@@ -28,16 +28,22 @@ public class IniParser
 			{
 				str = str.Trim();
 				if (str == "")
+				{
 					continue;
+				}
 
 				if (str.StartsWith("[") && str.EndsWith("]"))
+				{
 					str2 = str.Substring(1, str.Length - 2);
+				}
 				else
 				{
 					SectionPair pair;
 
 					if (str.StartsWith(";"))
+					{
 						str = str.Replace("=", "%eq%") + @"=%comment%";
+					}
 
 					string[] strArray = str.Split(new char[] { '=' }, 2);
 					string str3 = null;
@@ -103,7 +109,9 @@ public class IniParser
 		foreach (SectionPair pair in this.tmpList)
 		{
 			if (pair.Key.StartsWith(";"))
+			{
 				continue;
+			}
 
 			if (pair.Section == sectionName)
 			{
@@ -113,10 +121,8 @@ public class IniParser
 		return list.ToArray();
 	}
 
-	public string[] Sections
-	{
-		get
-		{
+	public string[] Sections {
+		get {
 			return (from pair in this.tmpList
 					group pair by pair.Section into bySection
 					from IGrouping<string, SectionPair> g in bySection
