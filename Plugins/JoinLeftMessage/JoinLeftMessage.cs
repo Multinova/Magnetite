@@ -37,7 +37,7 @@ namespace JoinLeftMessage
 
 		void Hooks_OnPlayerConnected(Player player)
 		{
-			Server.GetServer().Broadcast(player.Name + " has joined the game");
+			Server.GetServer().Broadcast(player.Name + " has join the game");
 		}
 
 		void Hooks_OnPlayerDisconnected(Player player)
