@@ -142,7 +142,7 @@ namespace Magnetite
 			ini.Save();
 		}
 
-		public void ToInv(Inventory inv)
+		public void ToInv(Inventory inv, bool notify = true)
 		{
 			try
 			{
@@ -155,9 +155,16 @@ namespace Magnetite
 					perms = true;
 
 				if (perms)
+				{
 					foreach (LoadOutItem item in items.Values)
+					{
+						if (notify)
+						{
+							inv.Notice(item);
+						}
 						inv.Add(item.invItem);
-				
+					}
+				}
 			}
 			catch (Exception ex)
 			{

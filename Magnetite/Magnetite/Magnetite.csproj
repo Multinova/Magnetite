@@ -65,6 +65,7 @@
     <Compile Include="Events\PlayerLootEvent.cs" />
     <Compile Include="Events\PlayerTakedmgEvent.cs" />
     <Compile Include="Events\PlayerTakeRadsEvent.cs" />
+    <Compile Include="Events\RespawnEvent.cs" />
     <Compile Include="Hooks.cs" />
     <Compile Include="IniParser.cs" />
     <Compile Include="Logger.cs" />

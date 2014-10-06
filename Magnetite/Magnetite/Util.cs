@@ -151,6 +151,10 @@
 
 		public static Hashtable HashtableFromFile(string path)
 		{
+			if (!File.Exists(path))
+			{
+				return new Hashtable();
+			}
 			using (FileStream stream = new FileStream(path, FileMode.Open))
 			{
 				BinaryFormatter formatter = new BinaryFormatter();
@@ -160,7 +164,8 @@
 
 		public static void HashtableToFile(Hashtable ht, string path)
 		{
-			using (FileStream stream = new FileStream(path, FileMode.Create))
+			FileMode mode = File.Exists(path) ? FileMode.Create : FileMode.CreateNew;
+			using (FileStream stream = new FileStream(path, mode))
 			{
 				BinaryFormatter formatter = new BinaryFormatter();
 				formatter.Serialize(stream, ht);

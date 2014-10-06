@@ -251,7 +251,9 @@
 
 					this.datastore.Clear();
 					foreach (DictionaryEntry entry in hashtable)
+					{
 						this.datastore[entry.Key] = entry.Value;
+					}
 
 					Debug.Log("DataStore Loaded from " + PATH);
 				}
@@ -263,7 +265,7 @@
 			else
 			{
 				Logger.LogWarning("[DataStore] File not exists, create " + PATH);
-				File.Create(PATH);
+				//File.Create(PATH);
 				this.datastore.Clear();
 				this.Save();
 			}
@@ -285,11 +287,8 @@
 
 		public void Save()
 		{
-			if (this.datastore.Count != 0)
-			{
-				Util.HashtableToFile(this.datastore, PATH);
-				Debug.Log("DataStore saved to " + PATH);
-			}
+			Util.HashtableToFile(this.datastore, PATH);
+			Debug.Log("DataStore saved to " + PATH);
 		}
 
 		public object[] Values(string tablename)

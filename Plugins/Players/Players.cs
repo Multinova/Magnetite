@@ -18,6 +18,12 @@ namespace Players
 			}
 		}
 
+		public override string Help {
+			get {
+				return "/players (Show list of players)";
+			}
+		}
+
 		public override Version Version {
 			get {
 				return new Version(0, 1, 0, 0);

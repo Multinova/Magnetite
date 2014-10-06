@@ -19,6 +19,12 @@ namespace Magnetite
 			}
 		}
 
+		public virtual string Help {
+			get {
+				return "";
+			}
+		}
+
 		public virtual bool Enabled {
 			get;
 			set;

@@ -25,7 +25,7 @@ namespace Magnetite
 			Array.Copy(command, 1, args, 0, command.Length - 1);
 			quotedArgs = GetQuotedStringArgs(args);
 
-			Logger.Log("Command: " + cmd + ", " + quotedArgs.Length + " arguments, " + String.Join(" ", quotedArgs));
+			//Logger.Log("Command: " + cmd + ", " + quotedArgs.Length + " arguments, " + String.Join(" ", quotedArgs));
 		}
 
 		public string[] GetArguments(int start, int length)

@@ -37,12 +37,35 @@ namespace JoinLeftMessage
 
 		void Hooks_OnPlayerConnected(Player player)
 		{
-			Server.GetServer().Broadcast(player.Name + " has join the game");
+			if (joinleft.enabled)
+			{
+				Server.GetServer().Broadcast(String.Format(joinleft.join, player.Name));
+			}
 		}
 
 		void Hooks_OnPlayerDisconnected(Player player)
 		{
-			Server.GetServer().Broadcast(player.Name + " has left the game");
+			if (joinleft.enabled)
+			{
+				Server.GetServer().Broadcast(String.Format(joinleft.left, player.Name));
+			}
 		}
+	}
+
+	[ConsoleSystem.Factory("joinleft")]
+	public class joinleft : ConsoleSystem
+	{
+		static joinleft() { }
+
+		public joinleft() : base() { }
+
+		[ConsoleSystem.Admin]
+		public static bool enabled = true;
+
+		[ConsoleSystem.Admin]
+		public static string join = "{0} has joined the game";
+
+		[ConsoleSystem.Admin]
+		public static string left = "{0} has left the game";
 	}
 }

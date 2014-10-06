@@ -306,6 +306,7 @@ namespace Magnetite.Patcher
 			TypeDefinition serverMGR = rustAssembly.MainModule.GetType("ServerMgr");
 			MethodDefinition disable = serverMGR.GetMethod("OnDisable");
 			MethodDefinition shutdown = hooksClass.GetMethod("ServerShutdown");
+
 			CloneMethod(disable);
 			ILProcessor iLProcessor = disable.Body.GetILProcessor();
 			iLProcessor.InsertBefore(disable.Body.Instructions[0x00], Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(shutdown)));

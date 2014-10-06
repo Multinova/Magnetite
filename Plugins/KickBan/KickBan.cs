@@ -48,6 +48,7 @@ namespace KickBan
 							if (target.Owner || target.Admin || target.Moderator)
 							{
 								player.Message("You can't ban this player!");
+								return;
 							}
 							string[] reason = new string[command.quotedArgs.Length - 1];
 							Array.Copy(command.quotedArgs, 1, reason, 0, command.quotedArgs.Length - 1);
@@ -83,6 +84,7 @@ namespace KickBan
 							if (target.Owner || target.Admin || target.Moderator)
 							{
 								player.Message("You can't ban this player!");
+								return;
 							}
 							string[] reason = new string[command.quotedArgs.Length - 1];
 							Array.Copy(command.quotedArgs, 1, reason, 0, command.quotedArgs.Length - 1);

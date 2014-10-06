@@ -45,7 +45,9 @@
 		{
 			BasePlayer player = BasePlayer.Find(s);
 			if (player != null)
+			{
 				return new Player(player);
+			}
 			return null;
 		}
 

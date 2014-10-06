@@ -28,7 +28,8 @@ namespace Magnetite
 				con = InnerMain;
 
 			bool flag = _inv.GiveItem(item._item, con);
-			if (!flag) {
+			if (!flag)
+			{
 				flag = _inv.GiveItem(item._item);
 			}
 
@@ -50,20 +51,26 @@ namespace Magnetite
 			return _inv.GiveItem(itemID, amount, true);
 		}
 
-		public ItemContainer InnerBelt {
-			get {
+		public ItemContainer InnerBelt
+		{
+			get
+			{
 				return _inv.containerBelt;
 			}
 		}
 
-		public ItemContainer InnerMain {
-			get {
+		public ItemContainer InnerMain
+		{
+			get
+			{
 				return _inv.containerMain;
 			}
 		}
 
-		public ItemContainer InnerWear {
-			get {
+		public ItemContainer InnerWear
+		{
+			get
+			{
 				return _inv.containerWear;
 			}
 		}
@@ -90,6 +97,23 @@ namespace Magnetite
 		{
 			return (from item in _inv.containerWear.itemList
 					select new InventoryItem(item)).ToList();
+		}
+
+		public void Notice(LoadOutItem loItem)
+		{
+			string msg = String.Format("{0} {1}", InventoryItem.GetItemID(loItem.Name), loItem.Amount);
+			Notice(msg);
+		}
+
+		public void Notice(InventoryItem item)
+		{
+			string msg = String.Format("{0} {1}", item.ItemID, item.Quantity);
+			Notice(msg);
+		}
+
+		public void Notice(string msg)
+		{
+			owner.basePlayer.Command("note.inv " + msg);
 		}
 	}
 }

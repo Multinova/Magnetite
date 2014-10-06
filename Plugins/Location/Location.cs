@@ -17,6 +17,12 @@ namespace Location
 			}
 		}
 
+		public override string Help {
+			get {
+				return "/location (Show your current location)";
+			}
+		}
+
 		public override Version Version {
 			get {
 				return new Version(0, 1, 0, 0);

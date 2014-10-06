@@ -40,6 +40,10 @@ namespace DeathMessage
 				Player victim = pde.Victim;
 				if (pde.Attacker is BasePlayer)
 				{
+					if (!deathmessages.showsuicide && pde.DamageType != Rust.DamageType.Bleeding)
+					{
+						return;
+					}
 					Player attacker = new Player((BasePlayer)pde.Attacker);
 					if (attacker.SteamID == victim.SteamID)
 					{
@@ -77,6 +81,11 @@ namespace DeathMessage
 				}
 				else if (pde.Attacker is BaseAnimal)
 				{
+
+					if (!deathmessages.showanimal)
+					{
+						return;
+					}
 					NPC npc = new NPC((BaseAnimal)pde.Attacker);
 					Server.GetServer().Broadcast(String.Format(deathmessages.animal, victim.Name, npc.Name));
 				}
@@ -122,6 +131,12 @@ namespace DeathMessage
 
 		[ConsoleSystem.Admin]
 		public static bool enabled = true;
+
+		[ConsoleSystem.Admin]
+		public static bool showsuicide = true;
+
+		[ConsoleSystem.Admin]
+		public static bool showanimal = true;
 
 		[ConsoleSystem.Admin]
 		public static string player = "{0} was killed by {1} using {2} at {3} meters";

@@ -27,6 +27,12 @@ namespace Kits
 			}
 		}
 
+		public override string Help {
+			get {
+				return "/kit <kit name>";
+			}
+		}
+
 		public override Version Version {
 			get {
 				return new Version(0, 1, 0, 0);
@@ -41,7 +47,7 @@ namespace Kits
 			starter.Add("Stone Hatchet", 1);
 			starter.Add("Apple", 2);
 			starter.Add("Flare", 1);
-			_kits.Add("starter", starter);
+			kits.Add("starter", starter);
 			Hooks.OnCommand += Hooks_OnCommand;
 		}
 
@@ -109,7 +115,7 @@ namespace Kits
 
 		[ConsoleSystem.Admin]
 		[ConsoleSystem.Help("kits.items <kit name>", "")]
-		public static void list(ConsoleSystem.Arg arg)
+		public static void items(ConsoleSystem.Arg arg)
 		{
 			if (arg.Args.Length == 1)
 			{

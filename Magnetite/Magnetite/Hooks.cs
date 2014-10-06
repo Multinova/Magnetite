@@ -34,6 +34,7 @@ namespace Magnetite
 		public delegate void LootingItemHandlerDelagate(ItemLootEvent ile);
 		public delegate void ServerShutdownHandlerDelagate(string info);
 
+		public delegate void RespawnHandlerDelagate(RespawnEvent re);
 
 		public static event Hooks.BuildingPartAttackedHandlerDelagate OnBuildingPartAttacked;
 		public static event Hooks.BuildingPartDestroyedHandlerDelagate OnBuildingPartDestroyed;
@@ -58,6 +59,8 @@ namespace Magnetite
 		public static event Hooks.LootingPlayerHandlerDelagate OnLootingPlayer;
 		public static event Hooks.LootingItemHandlerDelagate OnLootingItem;
 		public static event Hooks.ServerShutdownHandlerDelagate OnServerShutdown;
+
+		public static event Hooks.RespawnHandlerDelagate OnRespawn;
 
 		#endregion
 
@@ -508,6 +511,13 @@ namespace Magnetite
 
 		public static void Respawn(BasePlayer player, bool newpos)
 		{
+			Player p = new Player(player);
+			RespawnEvent re = new RespawnEvent(p);
+			if (OnRespawn != null)
+			{
+				OnRespawn(re);
+			}
+
 			++ServerPerformance.spawns;
 			if (newpos)
 			{
@@ -515,12 +525,21 @@ namespace Magnetite
 				player.transform.position = spawnPoint.pos;
 				player.transform.rotation = spawnPoint.rot;
 			}
+			if (re.ChangePos && re.SpawnPos != Vector3.zero)
+			{
+				player.transform.position = re.SpawnPos;
+			}
 			player.supressSnapshots = true;
 			player.StopSpectating();
 			player.UpdateNetworkGroup();
 			player.StartSleeping();
 			player.metabolism.Reset();
 			player.inventory.GiveDefaultItems();
+			/*if (re.GiveDefault)
+			{
+				player.inventory.GiveDefaultItems();
+			}*/
+				
 			player.SendFullSnapshot();
 		}
 
