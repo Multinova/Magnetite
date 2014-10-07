@@ -33,7 +33,6 @@ namespace Magnetite
 		public delegate void LootingPlayerHandlerDelagate(PlayerLootEvent ple);
 		public delegate void LootingItemHandlerDelagate(ItemLootEvent ile);
 		public delegate void ServerShutdownHandlerDelagate(string info);
-
 		public delegate void RespawnHandlerDelagate(RespawnEvent re);
 
 		public static event Hooks.BuildingPartAttackedHandlerDelagate OnBuildingPartAttacked;
@@ -59,7 +58,6 @@ namespace Magnetite
 		public static event Hooks.LootingPlayerHandlerDelagate OnLootingPlayer;
 		public static event Hooks.LootingItemHandlerDelagate OnLootingItem;
 		public static event Hooks.ServerShutdownHandlerDelagate OnServerShutdown;
-
 		public static event Hooks.RespawnHandlerDelagate OnRespawn;
 
 		#endregion

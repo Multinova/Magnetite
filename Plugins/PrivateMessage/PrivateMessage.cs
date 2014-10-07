@@ -46,7 +46,8 @@ namespace PrivateMessage
 				Player player = command.User;
 				if (command.quotedArgs.Length < 2)
 				{
-					Player target = Player.FindByName(command.quotedArgs[0]);
+					int founds;
+					Player target = Player.FindByName(command.quotedArgs[0], out founds);
 					if (target != null)
 					{
 						string[] message = new string[command.quotedArgs.Length - 1];
@@ -55,9 +56,13 @@ namespace PrivateMessage
 						target.MessageFrom("[PM] " + player.Name, String.Join(" ", message));
 						player.MessageFrom("[PM] " + player.Name, String.Join(" ", message));
 					}
-					else
+					else if (founds == 0)
 					{
 						player.Message("No players found with that name!");
+					}
+					else
+					{
+						player.Message("Multiple players found with that name!");
 					}
 				}
 				else

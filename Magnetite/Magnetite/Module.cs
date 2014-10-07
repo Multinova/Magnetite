@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Magnetite
 {
@@ -71,6 +72,11 @@ namespace Magnetite
 		//
 		public virtual void DeInitialize()
 		{
+		}
+
+		protected DataStore DataStore(string path)
+		{
+			return new DataStore(Path.Combine(this.ModuleFolder, path));
 		}
 
 		protected virtual void Dispose(bool disposing)

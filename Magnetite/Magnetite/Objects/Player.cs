@@ -75,7 +75,6 @@ namespace Magnetite
 				if (value)
 				{
 					MakeModerator();
-					//ServerUsers.Set(GameID, ServerUsers.UserGroup.Moderator, Name, "");
 				}
 				else
 				{
@@ -99,12 +98,10 @@ namespace Magnetite
 				if (value)
 				{
 					MakeOwner();
-					//ServerUsers.Set(GameID, ServerUsers.UserGroup.Owner, Name, "");
 				}
 				else
 				{
 					MakeNone();
-					//ServerUsers.Clear(GameID);
 				}
 			}
 		}
@@ -203,7 +200,17 @@ namespace Magnetite
 			{
 				return new Player(player);
 			}
-			Logger.LogDebug("[Player] Couldn't find player!");
+			return null;
+		}
+
+		public static Player FindByName(string name, out int number)
+		{
+			List<BasePlayer> players = BasePlayer.activePlayerList.FindAll((BasePlayer x) => x.displayName.Contains(name));
+			number = players.Count;
+			if (players.Count == 1)
+			{
+				return new Player(players[0]);
+			}
 			return null;
 		}
 

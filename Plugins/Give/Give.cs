@@ -62,7 +62,8 @@ namespace Give
 				}
 				else if (command.quotedArgs.Length == 3)
 				{
-					Player target = Player.FindByName(command.quotedArgs[0]);
+					int founds;
+					Player target = Player.FindByName(command.quotedArgs[0], out founds);
 					if (target != null)
 					{
 						string item = command.quotedArgs[1];
@@ -77,9 +78,13 @@ namespace Give
 							player.Message("Item not found!");
 						}
 					}
-					else
+					else if (founds == 0)
 					{
 						player.Message("No players found with that name!");
+					}
+					else
+					{
+						player.Message("Multiple players found with that name!");
 					}
 				}
 				else

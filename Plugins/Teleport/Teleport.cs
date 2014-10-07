@@ -46,27 +46,38 @@ namespace Teleport
 				{
 					if (command.quotedArgs.Length == 1)
 					{
-						Player target = Player.FindByName(command.quotedArgs[0]);
+						int founds;
+						Player target = Player.FindByName(command.quotedArgs[0], out founds);
 						if (target != null)
 						{
 							player.TeleportToPlayer(target);
 						}
-						else
+						else if (founds == 0)
 						{
 							player.Message("No players found with that name!");
+						}
+						else
+						{
+							player.Message("Multiple players found with that name!");
 						}
 					}
 					else if (command.quotedArgs.Length == 2)
 					{
-						Player target = Player.FindByName(command.quotedArgs[0]);
-						Player target2 = Player.FindByName(command.quotedArgs[1]);
+						int founds;
+						int founds2;
+						Player target = Player.FindByName(command.quotedArgs[0], out founds);
+						Player target2 = Player.FindByName(command.quotedArgs[1], out founds2);
 						if (target != null && target2 != null)
 						{
 							target.TeleportToPlayer(target2);
 						}
-						else
+						else if (founds == 0 || founds2 == 0)
 						{
 							player.Message("No players found with that name!");
+						}
+						else
+						{
+							player.Message("Multiple players found with that name!");
 						}
 					}
 					else
@@ -85,7 +96,8 @@ namespace Teleport
 
 				if (command.quotedArgs.Length == 1)
 				{
-					Player target = Player.FindByName(command.quotedArgs[0]);
+					int founds;
+					Player target = Player.FindByName(command.quotedArgs[0], out founds);
 					if (target != null)
 					{
 						if (!Requests.Contains(player.SteamID))
@@ -99,9 +111,13 @@ namespace Teleport
 							player.Message(target.Name + " has already been requested!");
 						}
 					}
-					else
+					else if (founds == 0)
 					{
 						player.Message("No players found with that name!");
+					}
+					else
+					{
+						player.Message("Multiple players found with that name!");
 					}
 				}
 				else

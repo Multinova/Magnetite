@@ -77,15 +77,20 @@ namespace AirDrop
 				{
 					if (command.quotedArgs.Length == 1)
 					{
-						Player target = Player.FindByName(command.quotedArgs[0]);
+						int founds;
+						Player target = Player.FindByName(command.quotedArgs[0], out founds);
 						if (target != null)
 						{
 							World.GetWorld().AirDropAtPlayer(target);
 							player.Message("Air drop called on player " + target.Name);
 						}
-						else
+						else if (founds == 0)
 						{
 							player.Message("No players found with that name!");
+						}
+						else
+						{
+							player.Message("Multiple players found with that name!");
 						}
 					}
 					else

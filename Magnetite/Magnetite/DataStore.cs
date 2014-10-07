@@ -308,9 +308,9 @@
 
 		public DataStore(string path)
 		{
-			path = RemoveChars(path);
+			path = path.Contains(":\\") ? path : RemoveChars(path);
 			datastore = new Hashtable();
-			PATH = Path.Combine(Util.GetPublicFolder(), path);
+			PATH = path.Contains(":") ? path : Path.Combine(Util.GetPublicFolder(), path);
 		}
 	}
 }

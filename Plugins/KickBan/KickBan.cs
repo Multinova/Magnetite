@@ -42,7 +42,8 @@ namespace KickBan
 				{
 					if (command.quotedArgs.Length > 0)
 					{
-						Player target = Player.FindByName(command.quotedArgs[0]);
+						int founds;
+						Player target = Player.FindByName(command.quotedArgs[0], out founds);
 						if (target != null)
 						{
 							if (target.Owner || target.Admin || target.Moderator)
@@ -57,9 +58,13 @@ namespace KickBan
 
 							target.Kick(String.Join(" ", reason));
 						}
-						else
+						else if (founds == 0)
 						{
 							player.Message("No players found with that name!");
+						}
+						else
+						{
+							player.Message("Multiple players found with that name!");
 						}
 					}
 					else
@@ -78,7 +83,8 @@ namespace KickBan
 				{
 					if (command.quotedArgs.Length > 0)
 					{
-						Player target = Player.FindByName(command.quotedArgs[0]);
+						int founds;
+						Player target = Player.FindByName(command.quotedArgs[0], out founds);
 						if (target != null)
 						{
 							if (target.Owner || target.Admin || target.Moderator)
@@ -93,9 +99,13 @@ namespace KickBan
 
 							target.Ban(String.Join(" ", reason));
 						}
-						else
+						else if (founds == 0)
 						{
 							player.Message("No players found with that name!");
+						}
+						else
+						{
+							player.Message("Multiple players found with that name!");
 						}
 					}
 					else
