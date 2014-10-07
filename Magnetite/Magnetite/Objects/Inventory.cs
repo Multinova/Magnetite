@@ -11,6 +11,24 @@ namespace Magnetite
 
 		public readonly Player owner;
 
+		public ItemContainer InnerBelt {
+			get {
+				return _inv.containerBelt;
+			}
+		}
+
+		public ItemContainer InnerMain {
+			get {
+				return _inv.containerMain;
+			}
+		}
+
+		public ItemContainer InnerWear {
+			get {
+				return _inv.containerWear;
+			}
+		}
+
 		public Inventory(PlayerInventory inv)
 		{
 			_inv = inv;
@@ -21,11 +39,17 @@ namespace Magnetite
 		{
 			ItemContainer con;
 			if (item.containerPref == InventoryItem.ContainerPreference.Belt)
+			{
 				con = InnerBelt;
+			}
 			else if (item.containerPref == InventoryItem.ContainerPreference.Wear)
+			{
 				con = InnerWear;
+			}
 			else
+			{
 				con = InnerMain;
+			}
 
 			bool flag = _inv.GiveItem(item._item, con);
 			if (!flag)
@@ -49,30 +73,6 @@ namespace Magnetite
 		public bool Add(int itemID, int amount)
 		{
 			return _inv.GiveItem(itemID, amount, true);
-		}
-
-		public ItemContainer InnerBelt
-		{
-			get
-			{
-				return _inv.containerBelt;
-			}
-		}
-
-		public ItemContainer InnerMain
-		{
-			get
-			{
-				return _inv.containerMain;
-			}
-		}
-
-		public ItemContainer InnerWear
-		{
-			get
-			{
-				return _inv.containerWear;
-			}
 		}
 
 		public List<InventoryItem> AllItems()
@@ -99,11 +99,13 @@ namespace Magnetite
 					select new InventoryItem(item)).ToList();
 		}
 
+		/*
 		public void Notice(LoadOutItem loItem)
 		{
 			string msg = String.Format("{0} {1}", InventoryItem.GetItemID(loItem.Name), loItem.Amount);
 			Notice(msg);
 		}
+		*/
 
 		public void Notice(InventoryItem item)
 		{

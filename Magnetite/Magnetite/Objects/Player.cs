@@ -316,8 +316,6 @@ namespace Magnetite
 
 		public void Teleport(float x, float y, float z)
 		{
-			ProtoBuf.PlayerInventory inv = basePlayer.inventory.Save(false);
-
 			basePlayer.supressSnapshots = true;
 			basePlayer.transform.position = UnityEngine.Vector3.zero;
 			basePlayer.UpdateNetworkGroup();
@@ -326,13 +324,6 @@ namespace Magnetite
 			basePlayer.UpdateNetworkGroup();
 			basePlayer.UpdatePlayerCollider(true, false);
 			basePlayer.SendFullSnapshot();
-			
-			basePlayer.inventory.Load(inv);
-			/*
-			foreach (InventoryItem item in items)
-			{
-				Inventory.Add(item);
-			}*/
 		}
 
 		#endregion

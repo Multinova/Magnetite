@@ -39,10 +39,12 @@
 			}
 		}
 
+		/*
 		public LoadOut CreateLoadOut(string name)
 		{
 			return new LoadOut(name);
 		}
+		*/
 
 		public void DestroyObject(GameObject go)
 		{

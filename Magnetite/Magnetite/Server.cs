@@ -13,7 +13,7 @@
 
 		public Dictionary<ulong, OfflinePlayer> OfflinePlayers;
 
-		public Dictionary<string, LoadOut> LoadOuts;
+		//public Dictionary<string, LoadOut> LoadOuts;
 
 		public DataStore serverData;
 
@@ -56,7 +56,7 @@
 			if (server == null)
 			{
 				server = new Magnetite.Server();
-				server.LoadOuts = new Dictionary<string, LoadOut>();
+				//server.LoadOuts = new Dictionary<string, LoadOut>();
 				server.Players = new Dictionary<ulong, Player>();
 				server.OfflinePlayers = new Dictionary<ulong, OfflinePlayer>();
 				server.serverData = new DataStore("ServerData.ds");
@@ -79,6 +79,7 @@
 			}
 		}*/
 
+		/*
 		public void LoadLoadouts()
 		{
 			DirectoryInfo loadoutPath = new DirectoryInfo(Util.GetLoadoutFolder());
@@ -91,6 +92,7 @@
 			}
 			Logger.Log("[Server] " + LoadOuts.Count.ToString() + " loadout loaded!");
 		}
+		*/
 
 		public void LoadOfflinePlayers()
 		{

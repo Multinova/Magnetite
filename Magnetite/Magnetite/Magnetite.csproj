@@ -79,8 +79,8 @@
     <Compile Include="Objects\Entity.cs" />
     <Compile Include="Objects\Inventory.cs" />
     <Compile Include="Objects\InventoryItem.cs" />
-    <Compile Include="Objects\LoadOut.cs" />
-    <Compile Include="Objects\LoadOutItem.cs" />
+    <None Include="Objects\LoadOut.cs" />
+    <None Include="Objects\LoadOutItem.cs" />
     <Compile Include="Objects\NPC.cs" />
     <Compile Include="Objects\OfflinePlayer.cs" />
     <Compile Include="Objects\Player.cs" />

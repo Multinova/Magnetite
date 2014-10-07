@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace Magnetite
 {
+	/*
 	public class LoadOut
 	{
 		public Dictionary<int, LoadOutItem> items;
@@ -172,5 +173,6 @@ namespace Magnetite
 			}
 		}
 	}
+	*/
 }
 

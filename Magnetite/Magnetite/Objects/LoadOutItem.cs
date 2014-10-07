@@ -2,6 +2,7 @@
 
 namespace Magnetite
 {
+	/*
 	public class LoadOutItem
 	{
 		public readonly int Amount;
@@ -25,5 +26,6 @@ namespace Magnetite
 			}
 		}
 	}
+	*/
 }
 
