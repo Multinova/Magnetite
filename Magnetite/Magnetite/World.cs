@@ -19,7 +19,7 @@ namespace Magnetite
 
 		public void AirDropAtPlayer(Player player)
 		{
-			BaseEntity entity = GameManager.CreateEntity("events/cargo_plane", player.Location, player.basePlayer.transform.rotation);
+			BaseEntity entity = GameManager.CreateEntity("events/cargo_plane", player.basePlayer.transform.position, player.basePlayer.transform.rotation);
 			if (!(bool)((UnityEngine.Object)entity))
 			{
 				return;
