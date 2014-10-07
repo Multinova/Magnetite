@@ -8,8 +8,15 @@ namespace Magnetite
 	{
 		public static string Version = "0.9.2";
 
+		public static bool loaded = false;
+
 		public static void AttachBootstrap()
 		{
+			if (loaded)
+			{
+				return;
+			}
+			loaded = true;
 			Config.Init();
 			Logger.Init();
 			try

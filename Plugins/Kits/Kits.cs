@@ -233,7 +233,10 @@ namespace Kits
 
 			foreach (string kit in Kits.kits.Keys)
 			{
-				list.Add(kit);
+				if (kit != "users_data")
+				{
+					list.Add(kit);
+				}
 			}
 
 			arg.ReplyWith(String.Join(", ", list.ToArray()));
@@ -243,7 +246,7 @@ namespace Kits
 		[ConsoleSystem.Help("kits.items <kit name>", "")]
 		public static void items(ConsoleSystem.Arg arg)
 		{
-			if (arg.Args.Length == 1)
+			if (arg.Args != null && arg.Args.Length == 1)
 			{
 				string kit = arg.Args[0];
 
@@ -271,7 +274,7 @@ namespace Kits
 		[ConsoleSystem.Help("kits.settime <kit name> <time elapse claim>", "")]
 		public static void settime(ConsoleSystem.Arg arg)
 		{
-			if (arg.Args.Length == 2)
+			if (arg.Args != null && arg.Args.Length == 2)
 			{
 				string kit = arg.Args[0];
 				int time = int.Parse(arg.Args[1]);
@@ -298,7 +301,7 @@ namespace Kits
 		[ConsoleSystem.Help("kits.limit <kit name> <limit of claim>", "")]
 		public static void limit(ConsoleSystem.Arg arg)
 		{
-			if (arg.Args.Length == 2)
+			if (arg.Args != null && arg.Args.Length == 2)
 			{
 				string kit = arg.Args[0];
 				int limit = int.Parse(arg.Args[1]);
@@ -325,7 +328,7 @@ namespace Kits
 		[ConsoleSystem.Help("kits.addkit <kit name> <time elapse claim> <limit of claim>", "")]
 		public static void addkit(ConsoleSystem.Arg arg)
 		{
-			if (arg.Args.Length == 3)
+			if (arg.Args != null && arg.Args.Length == 3)
 			{
 				string kit = arg.Args[0];
 				int time = int.Parse(arg.Args[1]);
@@ -357,7 +360,7 @@ namespace Kits
 		[ConsoleSystem.Help("kits.removekit <kit name>", "")]
 		public static void removekit(ConsoleSystem.Arg arg)
 		{
-			if (arg.Args.Length == 1)
+			if (arg.Args != null && arg.Args.Length == 1)
 			{
 				string kit = arg.Args[0];
 
@@ -382,7 +385,7 @@ namespace Kits
 		[ConsoleSystem.Help("kits.additem <kit name> <item> <amount>", "")]
 		public static void additem(ConsoleSystem.Arg arg)
 		{
-			if (arg.Args.Length == 3)
+			if (arg.Args != null && arg.Args.Length == 3)
 			{
 				string kit = arg.Args[0];
 				string item = arg.Args[1];
@@ -422,7 +425,7 @@ namespace Kits
 		[ConsoleSystem.Help("kits.removeitem <kit name> <item>", "")]
 		public static void removeitem(ConsoleSystem.Arg arg)
 		{
-			if (arg.Args.Length == 2)
+			if (arg.Args != null && arg.Args.Length == 2)
 			{
 				string kit = arg.Args[0];
 				string item = arg.Args[1];

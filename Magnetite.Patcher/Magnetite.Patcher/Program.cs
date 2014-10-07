@@ -27,12 +27,12 @@ namespace Magnetite.Patcher
 			MethodDefinition attachBootstrap = MagnetiteBootstrap.GetMethod("AttachBootstrap");
 			MethodDefinition start = serverInit.GetMethod("Start");
 			// make sure it's not patched yet
-			if (start.Body.Instructions[0x05].ToString().Contains("Magnetite.Bootstrap::AttachBootstrap"))
+			if (start.Body.Instructions[0x00].ToString().Contains("Magnetite.Bootstrap::AttachBootstrap"))
 			{
 				throw new Exception("Assembly-CSharp is already patched!");
 			}
-			start.Body.GetILProcessor().InsertAfter(
-				start.Body.Instructions[0x04],
+			start.Body.GetILProcessor().InsertBefore(
+				start.Body.Instructions[0x00],
 				Instruction.Create(OpCodes.Call, rustAssembly.MainModule.Import(attachBootstrap))
 			);
 		}

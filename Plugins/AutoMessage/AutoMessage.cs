@@ -1,7 +1,7 @@
 ﻿using System;
 using Magnetite;
 
-namespace Magnetite
+namespace AutoMessage
 {
 	public class AutoMessage : Module
 	{
