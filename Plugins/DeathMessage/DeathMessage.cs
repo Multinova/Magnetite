@@ -23,8 +23,11 @@ namespace DeathMessage
 			}
 		}
 
+		private static Localization local;
+
 		public override void Initialize()
 		{
+			local = Localization("local.cfg");
 			Hooks.OnPlayerDied += Hooks_OnPlayerDied;
 		}
 

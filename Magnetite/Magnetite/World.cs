@@ -9,7 +9,9 @@ namespace Magnetite
 
 		public void AirDrop()
 		{
-			BaseEntity entity = GameManager.CreateEntity("events/cargo_plane", new Vector3(), new Quaternion());
+			System.Random rand = new System.Random();
+			Vector3 v3 = new Vector3(rand.Next(-1600, 1600), 0f, rand.Next(-1600, 1600));
+			BaseEntity entity = GameManager.CreateEntity("events/cargo_plane", v3, new Quaternion());
 			if (!(bool)((UnityEngine.Object)entity))
 			{
 				return;
@@ -42,6 +44,19 @@ namespace Magnetite
 		public float GetGround(Vector3 v3)
 		{
 			return GetGround(v3.x, v3.z);
+		}
+
+		public void Spawn(string prefab, float x, float z)
+		{
+			Spawn(prefab, x, GetGround(x, z), z);
+		}
+
+		public void Spawn(string prefab, float x, float y, float z)
+		{
+			GameManager.CreateEntity("events/" + prefab,
+				new UnityEngine.Vector3(x, y, z),
+				new UnityEngine.Quaternion()
+			).Spawn(true);
 		}
 
 		public static World GetWorld()

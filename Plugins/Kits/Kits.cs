@@ -108,7 +108,6 @@ namespace Kits
 
 		public static Hashtable User(Player player)
 		{
-			//Hashtable users = (Hashtable)data.datastore["users_data"];
 			if (!users.Contains(player.SteamID))
 			{
 				users[player.SteamID] = new Hashtable();
@@ -211,6 +210,22 @@ namespace Kits
 				{
 					player.Message("Wrong number of arguments.");
 				}
+			}
+			else if (command.cmd == "kits")
+			{
+				Player player = command.User;
+
+				List<string> list = new List<string>();
+
+				foreach (string kit in Kits.kits.Keys)
+				{
+					if (kit != "users_data")
+					{
+						list.Add(kit);
+					}
+				}
+
+				player.Message("kits: " + String.Join(", ", list.ToArray()));
 			}
 		}
     }

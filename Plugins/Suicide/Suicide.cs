@@ -37,8 +37,8 @@ namespace Suicide
 		{
 			if (command.cmd == "suicide")
 			{
-                Player player = command.User;
-                player.Kill();
+				Player player = command.User;
+				player.Kill();
 			}
 		}
     }

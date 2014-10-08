@@ -99,25 +99,7 @@ namespace Magnetite
 			{
 				return;
 			}
-			/*
-			if (cmd.cmd == "location")
-			{
-				player.Message(player.Location.ToString());
-				return;
-			}
-			if (cmd.cmd == "players")
-			{
-				string msg = Server.GetServer().Players.Count == 1 ? "You are alone!" : String.Format("There are: {0} players online!", Server.GetServer().Players.Count);
-				player.Message(msg);
-				return;
-			}
 
-			if ((cmd.cmd == "magnetite.reload") && player.Admin)
-			{
-				//PluginLoader.GetInstance().ReloadPlugins();
-				return;
-			}
-			*/
 			if (OnCommand != null)
 			{
 				OnCommand(cmd);
@@ -213,25 +195,26 @@ namespace Magnetite
 		// BaseAnimal.OnAttacked()
 		public static void NPCHurt(BaseAnimal animal, HitInfo info)
 		{
-			// works
 			var npc = new NPC(animal);
 
-			if (!Realm.Server() || (double)animal.myHealth <= 0.0)
+			if (Realm.Server())
 			{
-				return;
-			}
+				if (animal.myHealth <= 0)
+				{
+					return;
+				}
 
-			if (OnNPCHurt != null && (animal.myHealth - info.damageAmount) > 0.0f)
-			{
-				OnNPCHurt(new Events.NPCHurtEvent(npc, info));
-			}
+				if (OnNPCHurt != null && (animal.myHealth - info.damageAmount) > 0.0f)
+				{
+					OnNPCHurt(new Events.NPCHurtEvent(npc, info));
+				}
 
-			animal.myHealth -= info.damageAmount;
-			if ((double)animal.myHealth > 0.0)
-			{
-				return;
+				animal.myHealth -= info.damageAmount;
+				if (animal.myHealth <= 0)
+				{
+					animal.Die(info);
+				}
 			}
-			animal.Die(info);
 		}
 
 		// BaseAnimal.Die()
@@ -267,7 +250,6 @@ namespace Magnetite
 		// BasePlayer.Die()
 		public static void PlayerDied(BasePlayer player, HitInfo info)
 		{
-			// works
 			if (info == null)
 			{
 				info = new HitInfo();
@@ -293,7 +275,6 @@ namespace Magnetite
 		// BasePlayer.OnDisconnected()
 		public static void PlayerDisconnected(BasePlayer player)
 		{
-			// works
 			var p = new Player(player);
 
 			if (Server.GetServer().serverData.ContainsKey("OfflinePlayers", p.SteamID))
@@ -321,7 +302,6 @@ namespace Magnetite
 		// BasePlayer.OnAttacked()
 		public static void PlayerHurt(BasePlayer player, HitInfo info)
 		{
-			// not tested
 			var p = new Player(player);
 
 			if (info == null)
@@ -353,7 +333,6 @@ namespace Magnetite
 		// BasePlayer.TakeDamage()
 		public static void PlayerTakeDamage(BasePlayer player, float dmgAmount, Rust.DamageType dmgType)
 		{
-			// works?
 			var ptd = new PlayerTakedmgEvent(new Player(player), dmgAmount, dmgType);
 			if (OnPlayerTakeDamage != null)
 			{
@@ -379,8 +358,6 @@ namespace Magnetite
 		// BuildingBlock.OnAttacked()
 		public static void EntityAttacked(BuildingBlock bb, HitInfo info)
 		{
-			// works, event needed
-
 			var bp = new BuildingPart(bb);
 			// if entity will be destroyed call the method below
 			if ((bb.health - info.damageAmount) <= 0.0f)
@@ -406,7 +383,7 @@ namespace Magnetite
 		// BuildingBlock.BecomeFrame()
 		public static void EntityFrameDeployed(BuildingBlock bb)
 		{
-			// blockDefinition is null in this hook, but works
+			// blockDefinition is null in this hook
 
 			var bp = new BuildingPart(bb);
 			if (OnBuildingFrameDeployed != null)
@@ -429,7 +406,6 @@ namespace Magnetite
 		public static void EntityBuildingUpdate(BuildingBlock bb, HitInfo info)
 		{
 			// hammer prof = 1
-			// works
 			// called anytime you hit a building block with a constructor item (hammer)
 			BasePlayer player = info.Initiator as BasePlayer;
 			float proficiency = info.resourceGatherProficiency;
@@ -446,7 +422,6 @@ namespace Magnetite
 		// BaseCorpse.InitCorpse()
 		public static void CorpseInit(BaseCorpse corpse, BaseEntity parent)
 		{
-			// works
 			if (OnCorpseDropped != null)
 			{
 				OnCorpseDropped(new CorpseInitEvent(corpse, parent));
@@ -456,7 +431,6 @@ namespace Magnetite
 		// BaseCorpse.OnAttacked()
 		public static void CorpseHit(BaseCorpse corpse, HitInfo info)
 		{
-			// works
 			CorpseHurtEvent che = new CorpseHurtEvent(corpse, info);
 			if (OnCorpseAttacked != null)
 			{
@@ -467,7 +441,6 @@ namespace Magnetite
 		// PlayerLoot.StartLootingEntity()
 		public static void StartLootingEntity(PlayerLoot playerLoot, BasePlayer looter, BaseEntity entity)
 		{
-			// not tested, what is a lootable entity anyway?
 			var ele = new Events.EntityLootEvent(playerLoot, new Player(looter), new Entity(entity));
 
 			if (OnLootingEntity != null)
@@ -479,7 +452,6 @@ namespace Magnetite
 		// PlayerLoot.StartLootingPlayer()
 		public static void StartLootingPlayer(PlayerLoot playerLoot, BasePlayer looter, BasePlayer looted)
 		{
-			// not tested
 			var ple = new Events.PlayerLootEvent(playerLoot, new Player(looter), new Player(looted));
 
 			if (OnLootingPlayer != null)
@@ -491,7 +463,6 @@ namespace Magnetite
 		// PlayerLoot.StartLootingItem()
 		public static void StartLootingItem(PlayerLoot playerLoot, BasePlayer looter, Item item)
 		{
-			// works, event needed
 			var ile = new Events.ItemLootEvent(playerLoot, new Player(looter), item);
 
 			if (OnLootingItem != null)

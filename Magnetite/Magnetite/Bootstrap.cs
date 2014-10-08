@@ -19,6 +19,7 @@ namespace Magnetite
 			loaded = true;
 			Config.Init();
 			Logger.Init();
+			Localization.Init();
 			try
 			{
 				if (!magnetite.enabled)

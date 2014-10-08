@@ -74,6 +74,18 @@ namespace Magnetite
 		{
 		}
 
+		private Localization _local;
+
+		public Localization Local {
+			get {
+				if (_local == null)
+				{
+					_local = new Localization(Path.Combine(this.ModuleFolder, "locals.cfg"));
+				}
+				return _local;
+			}
+		}
+
 		protected DataStore DataStore(string path)
 		{
 			return new DataStore(Path.Combine(this.ModuleFolder, path));

@@ -31,8 +31,11 @@ namespace Give
 
 		public static Hashtable kits = new Hashtable();
 
+		private static Localization local;
+
 		public override void Initialize()
 		{
+			local = Localization("local.cfg");
 			Hooks.OnCommand += Hooks_OnCommand;
 		}
 
@@ -57,7 +60,8 @@ namespace Give
 					}
 					else
 					{
-						player.Message("Item not found!");
+						local.Message(player, "Item not found!");
+						//player.Message("Item not found!");
 					}
 				}
 				else if (command.quotedArgs.Length == 3)
@@ -75,21 +79,25 @@ namespace Give
 						}
 						else
 						{
-							player.Message("Item not found!");
+							local.Message(player, "Item not found!");
+							//player.Message("Item not found!");
 						}
 					}
 					else if (founds == 0)
 					{
-						player.Message("No players found with that name!");
+						local.Message(player, "No players found with that name!");
+						//player.Message("No players found with that name!");
 					}
 					else
 					{
-						player.Message("Multiple players found with that name!");
+						local.Message(player, "Multiple players found with that name!");
+						//player.Message("Multiple players found with that name!");
 					}
 				}
 				else
 				{
-					player.Message("Wrong number of arguments.");
+					local.Message(player, "Wrong number of arguments.");
+					//player.Message("Wrong number of arguments.");
 				}
 			}
 		}

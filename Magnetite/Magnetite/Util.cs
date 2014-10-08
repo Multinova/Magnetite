@@ -280,5 +280,15 @@
 			}
 			throw new Exception("Type not found " + typeName);
 		}
+
+		public static object GetTypeField(Type type, string field)
+		{
+			System.Reflection.FieldInfo fieldinfo = type.GetField(field);
+			if (fieldinfo != null && fieldinfo.IsStatic)
+			{
+				return fieldinfo.GetValue(null);
+			}
+			return null;
+		}
 	}
 }

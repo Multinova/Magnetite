@@ -300,6 +300,9 @@ namespace Magnetite
 			basePlayer.transform.position = new UnityEngine.Vector3(x, y, z);
 			basePlayer.UpdateNetworkGroup();
 			basePlayer.UpdatePlayerCollider(true, false);
+
+			basePlayer.inventory.SendSnapshot();
+
 			basePlayer.SendFullSnapshot();
 			throw new NotImplementedException("SafeTeleport is not yet implemented.");
 		}
@@ -323,6 +326,9 @@ namespace Magnetite
 			basePlayer.transform.position = new UnityEngine.Vector3(x, y, z);
 			basePlayer.UpdateNetworkGroup();
 			basePlayer.UpdatePlayerCollider(true, false);
+
+			basePlayer.inventory.SendSnapshot();
+
 			basePlayer.SendFullSnapshot();
 		}
 

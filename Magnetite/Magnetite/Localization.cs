@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace Magnetite
 		public static string default_lang = "french";
 
 		public static DataStore data;
+
+		private static Localization _instance;
 
 		public static string GetLang(Player player)
 		{
@@ -36,6 +39,15 @@ namespace Magnetite
 		{
 			data = new DataStore("languages.ds");
 		}
+
+		public static Localization GetInstance()
+		{
+			if (_instance == null)
+			{
+				//_instance = new Localization();
+			}
+			return _instance;
+		}
 		
 		public Localization(string path)
 		{
@@ -45,6 +57,53 @@ namespace Magnetite
 			}
 			ini = new IniParser(path);
 		}
+		/*
+		public void Load(string path)
+		{
+			if (!File.Exists(path))
+			{
+				return;
+			}
+			IniParser ini = new IniParser(path);
+		}
+
+		private readonly Hashtable keyPairs = new Hashtable();
+
+		private readonly List<IniParser.SectionPair> tmpList = new List<IniParser.SectionPair>();*/
+
+		#region Lang
+
+		public string lang(string language, string setting)
+		{
+			string value = ini.GetSetting(language, setting);
+			return value != null ? value : setting;
+		}
+
+		public string lang(string language, string setting, object arg0)
+		{
+			string value = lang(language, setting);
+			return string.Format(value, arg0);
+		}
+
+		public string lang(string language, string setting, object arg0, object arg1)
+		{
+			string value = lang(language, setting);
+			return string.Format(value, arg0, arg1);
+		}
+
+		public string lang(string language, string setting, object arg0, object arg1, object arg2)
+		{
+			string value = lang(language, setting);
+			return string.Format(value, arg0, arg1, arg2);
+		}
+
+		public string lang(string language, string setting, object[] format)
+		{
+			string value = lang(language, setting);
+			return string.Format(value, format);
+		}
+
+		#endregion
 
 		#region Localization
 
@@ -148,9 +207,15 @@ namespace Magnetite
 		public void Broadcast(string setting)
 		{
 			Server server = Server.GetServer();
+			Hashtable localized = new Hashtable();
 			foreach (Player player in server.ActivePlayers)
 			{
-				player.Message(_(player, setting));
+				string language = GetLang(player);
+				if (!localized.Contains(language))
+				{
+					localized.Add(language, lang(language, setting));
+				}
+				player.Message((string)localized[language]);
 			}
 		}
 

@@ -90,6 +90,28 @@ namespace Teleport
 					player.Message("You don't have permission to use this command!");
 				}
 			}
+			else if (command.cmd == "tpto")
+			{
+				Player player = command.User;
+				if (player.Admin)
+				{
+					if (command.quotedArgs.Length == 3)
+					{
+						int x = int.Parse(command.quotedArgs[0]);
+						int y = int.Parse(command.quotedArgs[1]);
+						int z = int.Parse(command.quotedArgs[2]);
+						player.Teleport(x, y, z);
+					}
+					else
+					{
+						player.Message("Wrong number of arguments.");
+					}
+				}
+				else
+				{
+					player.Message("You don't have permission to use this command!");
+				}
+			}
 			else if (command.cmd == "teleport")
 			{
 				Player player = command.User;
