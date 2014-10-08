@@ -33,13 +33,18 @@
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
       <HintPath>ref\Assembly-CSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Facepunch">
       <HintPath>ref\Facepunch.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>ref\UnityEngine.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +73,7 @@
     <Compile Include="Events\RespawnEvent.cs" />
     <Compile Include="Hooks.cs" />
     <Compile Include="IniParser.cs" />
+    <Compile Include="Localization.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Magnetite.cs" />
     <Compile Include="Module.cs" />
@@ -88,6 +94,7 @@
     <Compile Include="Server.cs" />
     <Compile Include="TimedEvent.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="Web.cs" />
     <Compile Include="World.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

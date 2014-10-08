@@ -26,15 +26,44 @@ namespace Magnetite
 			}
 		}
 
-		public static string GetValue(string Section, string Setting)
+		public static string GetValue(string section, string setting)
 		{
-			return MagnetiteConfig.GetSetting(Section, Setting);
+			return MagnetiteConfig.GetSetting(section, setting);
 		}
 
-		public static bool GetBoolValue(string Section, string Setting)
+		public static bool GetBoolValue(string section, string setting)
 		{
-			var val = MagnetiteConfig.GetSetting(Section, Setting);
+			var val = MagnetiteConfig.GetSetting(section, setting);
 			return val != null && val.ToLower() == "true";
+		}
+
+		public IniParser ini;
+
+		public Config(string path)
+		{
+			if (!File.Exists(path))
+			{
+				File.Create(path);
+			}
+			ini = new IniParser(path);
+			Debug.Log("Config " + path + " loaded!");
+		}
+
+		public string Get(string section, string setting)
+		{
+			return ini.GetSetting(section, setting);
+		}
+
+		public bool GetBool(string section, string setting)
+		{
+			var val = ini.GetSetting(section, setting);
+			return val != null && val.ToLower() == "true";
+		}
+
+		public int GetInt(string section, string setting)
+		{
+			var val = ini.GetSetting(section, setting);
+			return val != null ? int.Parse(val) : 0;
 		}
 	}
 }

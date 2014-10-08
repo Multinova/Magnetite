@@ -21,6 +21,10 @@
 
 		public static string server_message_name = "SERVER";
 
+		public System.Collections.Generic.List<string> ChatHistoryUsers;
+
+		public System.Collections.Generic.List<string> ChatHistoryMessages;
+
 		public Util util = new Util();
 
 		public void Broadcast(string arg)

@@ -79,6 +79,16 @@ namespace Magnetite
 			return new DataStore(Path.Combine(this.ModuleFolder, path));
 		}
 
+		protected Localization Localization(string path)
+		{
+			return new Localization(Path.Combine(this.ModuleFolder, path));
+		}
+
+		protected Config Config(string path)
+		{
+			return new Config(Path.Combine(this.ModuleFolder, path));
+		}
+
 		protected virtual void Dispose(bool disposing)
 		{
 		}

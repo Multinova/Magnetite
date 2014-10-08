@@ -157,7 +157,7 @@ namespace DeathMessage
 		public static string hunger = "{0} died from hunger";
 
 		[ConsoleSystem.Admin]
-		public static string fall = "{0} died from hunger";
+		public static string fall = "{0} died from fall";
 
 		[ConsoleSystem.Admin]
 		public static string cold = "{0} froze to death";

@@ -33,21 +33,30 @@
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\Magnetite\Magnetite\bin\Release\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Facepunch">
       <HintPath>..\..\Magnetite\Magnetite\bin\Release\Facepunch.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Magnetite">
       <HintPath>..\..\Magnetite\Magnetite\bin\Release\Magnetite.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\Magnetite\Magnetite\bin\Release\UnityEngine.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeathMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DeathMessage.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

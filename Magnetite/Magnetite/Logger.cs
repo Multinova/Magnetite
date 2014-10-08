@@ -31,6 +31,7 @@ namespace Magnetite
 		{
 			try
 			{
+				/*
 				logChat = Config.GetBoolValue("Logging", "chatInLog");
 				logDebug = Config.GetBoolValue("Logging", "debugInLog");
 				logErrors = Config.GetBoolValue("Logging", "errorInLog");
@@ -40,6 +41,7 @@ namespace Magnetite
 				showDebug = Config.GetBoolValue("Logging", "debugInConsole");
 				showErrors = Config.GetBoolValue("Logging", "errorInConsole");
 				showException = Config.GetBoolValue("Logging", "exceptionInConsole");
+				*/
 			}
 			catch (Exception ex)
 			{

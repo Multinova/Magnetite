@@ -178,6 +178,8 @@ namespace Magnetite
 				{
 					ConsoleSystem.Broadcast("chat.add " + StringExtensions.QuoteSafe(pChat.BroadcastName) + " " + StringExtensions.QuoteSafe(pChat.FinalText));
 					arg.ReplyWith(pChat.ReplyWith);
+					//Server.GetServer().ChatHistoryUsers.Add(pChat.BroadcastName);
+					//Server.GetServer().ChatHistoryMessages.Add(pChat.FinalText);
 				}
 
 				Logger.ChatLog(pChat.BroadcastName, pChat.FinalText);

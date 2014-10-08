@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9602A962-5D8B-43B6-9F67-91E56D8C0986}</ProjectGuid>
+    <ProjectGuid>{E17486CB-2286-4759-8776-FE045213C821}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Players</RootNamespace>
-    <AssemblyName>Players</AssemblyName>
+    <RootNamespace>History</RootNamespace>
+    <AssemblyName>History</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -33,24 +33,20 @@
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\Magnetite\Magnetite\bin\Release\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Facepunch">
       <HintPath>..\..\Magnetite\Magnetite\bin\Release\Facepunch.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Magnetite">
       <HintPath>..\..\Magnetite\Magnetite\bin\Release\Magnetite.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\Magnetite\Magnetite\bin\Release\UnityEngine.dll</HintPath>
-      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Players.cs" />
+    <Compile Include="History.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

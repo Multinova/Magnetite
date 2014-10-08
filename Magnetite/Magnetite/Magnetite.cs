@@ -5,7 +5,6 @@ namespace Magnetite
 	[ConsoleSystem.Factory("magnetite")]
 	public class magnetite : ConsoleSystem
 	{
-
 		[ConsoleSystem.Admin]
 		public static bool enabled = true;
 

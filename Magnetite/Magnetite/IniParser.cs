@@ -121,6 +121,24 @@ public class IniParser
 		return list.ToArray();
 	}
 
+	public Dictionary<string, string> GetSection(string sectionName)
+	{
+		System.Collections.Generic.Dictionary<string, string> list = new System.Collections.Generic.Dictionary<string, string>();
+		foreach (SectionPair pair in this.tmpList)
+		{
+			if (pair.Key.StartsWith(";"))
+			{
+				continue;
+			}
+
+			if (pair.Section == sectionName)
+			{
+				list.Add(pair.Key, (string)this.keyPairs[pair]);
+			}
+		}
+		return list;
+	}
+
 	public string[] Sections {
 		get {
 			return (from pair in this.tmpList
@@ -141,12 +159,6 @@ public class IniParser
 	public bool GetBoolSetting(string sectionName, string settingName)
 	{
 		return (GetSetting(sectionName, settingName).ToLower() == "true");
-	}
-
-	public bool isCommandOn(string cmdName)
-	{
-		string setting = this.GetSetting("Commands", cmdName);
-		return ((setting == null) || (setting == "true"));
 	}
 
 	public void Save()
