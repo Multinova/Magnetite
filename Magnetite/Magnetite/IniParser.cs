@@ -8,7 +8,9 @@ using System.Runtime.InteropServices;
 public class IniParser
 {
 	private readonly string iniFilePath;
+
 	private readonly Hashtable keyPairs = new Hashtable();
+
 	private readonly List<SectionPair> tmpList = new List<SectionPair>();
 
 	public readonly string Name;
@@ -20,7 +22,9 @@ public class IniParser
 		this.Name = Path.GetFileNameWithoutExtension(iniPath);
 
 		if (!File.Exists(iniPath))
+		{
 			throw new FileNotFoundException("Unable to locate " + iniPath);
+		}
 
 		using (TextReader reader = new StreamReader(iniPath))
 		{

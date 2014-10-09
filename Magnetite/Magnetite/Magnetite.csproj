@@ -86,6 +86,9 @@
     <Compile Include="Objects\Entity.cs" />
     <Compile Include="Objects\Inventory.cs" />
     <Compile Include="Objects\InventoryItem.cs" />
+    <None Include="locals.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Objects\LoadOut.cs" />
     <None Include="Objects\LoadOutItem.cs" />
     <Compile Include="Objects\NPC.cs" />

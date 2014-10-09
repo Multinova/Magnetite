@@ -20,7 +20,13 @@ namespace Teleport
 
 		public override Version Version {
 			get {
-				return new Version(0, 1, 0, 0);
+				return new Version(0, 1, 2, 0);
+			}
+		}
+
+		public override string Help {
+			get {
+				return "/tpa \"player\" (Send a teleport request)";
 			}
 		}
 
@@ -112,7 +118,7 @@ namespace Teleport
 					player.Message("You don't have permission to use this command!");
 				}
 			}
-			else if (command.cmd == "teleport")
+			else if (command.cmd == "teleport" || command.cmd == "tpa")
 			{
 				Player player = command.User;
 
@@ -122,14 +128,21 @@ namespace Teleport
 					Player target = Player.FindByName(command.quotedArgs[0], out founds);
 					if (target != null)
 					{
-						if (!Requests.Contains(player.SteamID))
+						if (player.SteamID == target.SteamID)
 						{
-							target.Message(player.Name + " want to be teleported to you /accept for comfirm the teleportation or /refuse");
-							player.Message("teleportation request sended to " + target.Name);
+							player.Message("Cannot teleport to yourself!");
+						}
+						else if (!Requests.Contains(player.SteamID))
+						{
+							target.Message(String.Format("{0} want to be teleported to you.", player.Name));
+							target.Message("Use /tpaccept for comfirm the teleportation or /tprefuse");
+							player.Message("Teleportation request sent to " + target.Name);
 							Requests.Add(target.SteamID, player.SteamID);
 						}
 						else
 						{
+							target.Message(String.Format("{0} tried to send you a teleport request, but you've already been asked.", player.Name));
+							target.Message("Use /tprefuse to clear previous request.");
 							player.Message(target.Name + " has already been requested!");
 						}
 					}
@@ -145,10 +158,10 @@ namespace Teleport
 				else
 				{
 					player.Message("Wrong number of arguments.");
-					player.Message("/teleport \"player\"");
+					player.Message("/tpa \"player\"");
 				}
 			}
-			else if (command.cmd == "accept")
+			else if (command.cmd == "accept" || command.cmd == "tpaccept")
 			{
 				Player player = command.User;
 				if (Requests.Contains(player.SteamID))
@@ -169,11 +182,16 @@ namespace Teleport
 					player.Message("No requests found.");
 				}
 			}
-			else if (command.cmd == "refuse")
+			else if (command.cmd == "refuse" || command.cmd == "tprefuse")
 			{
 				Player player = command.User;
 				if (Requests.Contains(player.SteamID))
 				{
+					Player target = Player.FindBySteamID((string)Requests[player.SteamID]);
+					if (target != null)
+					{
+						player.Message(String.Format("{0} has denied your request.", player.Name));
+					}
 					Requests.Remove(player.SteamID);
 					player.Message("Request denied.");
 				}

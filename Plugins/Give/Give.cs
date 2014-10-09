@@ -25,7 +25,7 @@ namespace Give
 
 		public override Version Version {
 			get {
-				return new Version(0, 1, 0, 0);
+				return new Version(0, 1, 1, 0);
 			}
 		}
 

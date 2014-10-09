@@ -186,6 +186,18 @@ namespace Magnetite
 
 			public override bool Test(Command command)
 			{
+				return command.User.Admin;
+			}
+		}
+
+		public sealed class Moderator : Condition
+		{
+			public string Error = "You don't have permission to use this command!";
+
+			public Moderator() { }
+
+			public override bool Test(Command command)
+			{
 				return command.User.Admin || command.User.Owner || command.User.Moderator;
 			}
 		}
